@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    { "source": "/github", "destination": "https://github.com/lucasdoell" },
+    {
+      "source": "/linkedin",
+      "destination": "https://linkedin.com/in/lucasdoell"
+    },
+    { "source": "/twitter", "destination": "https://twitter.com/lucasdoell" }
+  ]
+}
