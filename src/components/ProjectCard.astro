@@ -1,0 +1,24 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  image: string;
+  url: string;
+  urlName: string;
+}
+
+const { title, description, image, url, urlName } = Astro.props;
+---
+
+<!-- WIP -->
+<div class="">
+  <img src={image} alt="" />
+
+  <h2 class="text-white">{title}</h2>
+
+  <p>{description}</p>
+
+  <a href={url} class="text-white" rel="noopener noreferrer" target="_blank">
+    {urlName} &rarr;
+  </a>
+</div>
