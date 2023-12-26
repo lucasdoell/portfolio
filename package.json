@@ -11,15 +11,28 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/react": "^3.0.8",
     "@astrojs/tailwind": "^2.1.3",
     "@commitlint/cli": "^17.4.2",
     "@commitlint/config-conventional": "^17.4.2",
+    "@radix-ui/react-avatar": "^1.0.4",
+    "@radix-ui/react-dialog": "^1.0.5",
+    "@radix-ui/react-icons": "^1.3.0",
+    "@radix-ui/react-slot": "^1.0.2",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
     "astro": "^1.9.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.1.0",
-    "prettier-plugin-tailwindcss": "^0.2.1",
-    "tailwindcss": "^3.2.4"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwind-merge": "^2.2.0",
+    "tailwindcss": "^3.2.4",
+    "tailwindcss-animate": "^1.0.7",
+    "vaul": "^0.8.0"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -33,7 +46,6 @@
     }
   },
   "devDependencies": {
-    "prettier": "^3.1.0",
-    "prettier-plugin-astro": "^0.12.2"
+    "prettier": "^3.1.0"
   }
 }
