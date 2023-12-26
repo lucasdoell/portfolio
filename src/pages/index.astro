@@ -1,292 +1,226 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import Socials from "@components/Socials.astro";
-import Footer from "@components/Footer.astro";
+import { GlobeIcon, MailIcon, PhoneIcon } from "lucide-react";
+import { Section } from "@/components/react/ui/section";
+import { Button } from "@/components/react/ui/button";
+import { Card, CardHeader, CardContent } from "@/components/react/ui/card";
+import { Badge } from "@/components/react/ui/badge";
+import { ProjectCard } from "@/components/react/project-card";
+import { GitHubIcon } from "@/components/icons/GithubIcon";
+import { LinkedInIcon } from "@/components/icons/LinkedInIcon";
+import { XIcon } from "@/components/icons/XIcon";
+import { ModeToggle } from "@/components/react/mode-toggle";
+import "@/styles/globals.css";
 ---
 
-<Layout title="Lucas Doell">
-  <Socials />
-  <main class="m-auto max-w-5xl px-4 text-lg text-neutral-400">
-    <div class="pt-24 md:grid md:grid-cols-2">
-      <div>
-        <p class="max-w-lg pb-6">
-          Hi, I'm <span class="text-white">Lucas Doell</span>. I'm a full-stack
-          web developer.
-        </p>
-        <p class="max-w-lg">
-          <!-- I'm currently taking a gap semester from my studies at
-          <span class="text-white">Cornell University</span>. During this time,
-          I'm looking for work and learning new technologies. -->
-          I'm currently working for <span class="text-white">Appstle Inc.</span> as a
-          software developer. I'm also learning new technologies and working on
-          side projects in my free time.
-        </p>
-
-        <div class="py-6">
-          <a
-            class="my-12 text-violet-500 duration-300 hover:text-violet-300 hover:transition-colors focus:text-violet-300 focus:transition-colors"
-            href="mailto:lucas@lux.dev"
-          >
-            Hire me! &rarr;
-          </a>
-        </div>
+<Layout title="Lucas Doell | Full-Stack Software Developer">
+  <div class="container relative lg:mx-auto scroll-my-12 overflow-auto py-4 px-4 md:px-0 w-full max-w-2xl">
+      <div class="float-right">
+        <ModeToggle client:load />
       </div>
-
-      <div>
-        <img
-          src="/images/ai portrait purple.jpg"
-          class="m-auto h-48 w-auto rounded-full md:m-0 md:ml-auto"
-          alt="An AI-generated photo of Lucas."
-        />
-      </div>
-    </div>
-
-    <!-- Experience -->
-    <div class="py-8">
-      <h2 class="w-full border-b border-neutral-700 pb-2 text-white">
-        Experience
-      </h2>
-      <ul class="list-disc pl-6">
-        <li class="py-4">
-          <span class="text-white">Software Developer - Appstle Inc.</span>
-          <span class="italic lg:float-right lg:text-white">
-            February 2023 - December 2023
-          </span>
-          <ul class="list-disc pb-4 pl-6">
-            <li>Develop new features for over 30,000 merchants</li>
-            <li>
-              Write and implement code in multiple languages, including Java and
-              TypeScript
-            </li>
-            <li>
-              Develop APIs with Spring Boot and write front-end code using React
-            </li>
-            <li>Refactor React class components into function components</li>
-            <li>Help to maintain over 500,000 lines of code</li>
-            <li>Manage production database using MySQL and DynamoDB</li>
-            <li>
-              Create internal tools to customize features for specific merchants
-            </li>
-            <li>
-              Implement and use AWS Step Functions and Heartbeats to create
-              robust tasks and services
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-
-    <!-- Projects -->
-    <div class="py-8">
-      <h2 class="w-full border-b border-neutral-700 pb-2 text-white">
-        Projects
-      </h2>
-      <ul class="list-disc pl-6">
-        <li class="py-4">
-          <span class="text-white">Parsertime</span>
-          <span class="italic lg:float-right lg:text-white">Nov 2023 - Present</span>
-          <p class="pb-4">
-            A web app written to help collegiate Overwatch players track their performance
-            in scrimmages. The app is built with Next.js, Tailwind, and Prisma. It uses
-            a MySQL database hosted on PlanetScale and is deployed on Vercel. The app
-            allows users to create an account, create teams, and add scrim data from 
-            the ScrimTime workshop code. The app also provides a dashboard with statistics 
-            on the user's performance. The app is currently in development and will be 
-            released soon.
-          </p>
-          <a
-            class="text-white hover:text-gray-400"
-            href="https://github.com/lucasdoell/parsertime"
-            rel="noopener noreferrer"
-            target="_blank"
+  </div>
+  <main
+    class="container relative lg:mx-auto scroll-my-12 overflow-auto pb-4 px-4 print:p-12 md:pb-16 md:px-16"
+  >
+    <section
+      class="mx-auto w-full max-w-2xl space-y-8 bg-white dark:bg-zinc-950 print:space-y-6"
+    >
+      <div class="flex items-center justify-between">
+        <div class="flex-1 space-y-1.5">
+          <h1 class="text-2xl font-bold">Lucas Doell</h1>
+          <p
+            class="max-w-md text-pretty font-mono text-sm text-muted-foreground"
           >
-            View on GitHub &rarr;
-          </a>
-        </li>
-        <li class="py-4">
-          <span class="text-white">Interpreter/Compiler</span>
-          <span class="italic lg:float-right lg:text-white">Jun 2023 - Present</span>
-          <p class="pb-4">
-            An interpreter and compiler for a toy language built in both Go and Rust. 
-            The goal of the project was to implement the same project twice in both languages 
-            to be able to compare the experience of using each one and their standard libraries. 
-            Working with Go was a lot easier than working with Rust, but I learned a lot about 
-            the Rust language and satisfying its compiler in the process.
+            I'm a full-stack software developer most recently working for
+            Appstle Inc. I'm also learning new technologies and working on side
+            projects in my free time.
           </p>
-          <a
-            class="text-white hover:text-gray-400"
-            href="https://github.com/lucasdoell/"
-            rel="noopener noreferrer"
-            target="_blank"
+          <p
+            class="max-w-md items-center text-pretty font-mono text-xs text-muted-foreground"
           >
-            View on GitHub &rarr;
-          </a>
-        </li>
-        <li class="py-4">
-          <span class="text-white">OWL Bot</span>
-          <span class="italic lg:float-right lg:text-white">Mar 2023 - Jul 2023</span>
-          <p class="pb-4">
-            A Discord bot written in TypeScript using the Discord.js library. It
-            uses a custom API to fetch Overwatch League data and display it in
-            Discord. There are three different services in a monorepo: the
-            Discord bot, a web server to host the API, and a small web app to
-            provide some documentation. The web server is written in TypeScript
-            and Express, and implements Puppeteer in a Docker container to
-            scrape data from the Overwatch League website. This project was
-            quite the challenge to build out and I learned a lot about web
-            scraping and Docker infrastructure in the process.
-          </p>
-          <a
-            class="text-white hover:text-gray-400"
-            href="https://github.com/lucasdoell/owlbot"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            View on GitHub &rarr;
-          </a>
-        </li>
-        <li class="py-4">
-          <span class="text-white">OCaml Sports Stats Web Scraper</span>
-          <span class="italic lg:float-right lg:text-white">Sep 2022 - Dec 2022</span>
-          <p class="pb-4">
-            Final project for CS 3110. Written primarily in OCaml with testing
-            in OUnit2. The aim of the project was to take an input from the
-            command line and use the provided arguments to query a website,
-            download the HTML content, and parse it with string slicing. This
-            project was developed in a team environment, and did not achieve
-            100% completion. However, basic functionality was completed and you
-            can find the code on my GitHub page.
-          </p>
-          <a
-            class="text-white hover:text-gray-400"
-            href="https://github.com/lucasdoell/CS3110-scraping"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            View on GitHub &rarr;
-          </a>
-        </li>
-        <li class="py-4">
-          <span class="text-white">
-            Headless Ecommerce Store with Shopify, Next.js, and Tailwind
-          </span>
-          <span class="italic lg:float-right lg:text-white">Jul 2022 - Aug 2022</span>
-          <p class="pb-4">
-            A website built with Next.js and Tailwind CSS to demonstrate how to
-            build a headless ecommerce store with Shopify. This project was
-            built as I was learning JavaScript and React, and was a great way to
-            improve my own skills. I am currently developing a similar site for
-            a client, but with TypeScript instead of JavaScript.
-          </p>
-          <a
-            class="text-white hover:text-gray-400"
-            href="https://github.com/lucasdoell/shopify-nextjs"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            View on GitHub &rarr;
-          </a>
-        </li>
-        <li class="py-4">
-          <span class="text-white">Roundest Pokémon</span>
-          <span class="italic lg:float-right lg:text-white">Aug 2022</span>
-          <p class="pb-4">
-            Built with Next.js, Tailwind, Prisma, tRPC, and MySQL. This project
-            was developed following
             <a
-              class="text-white hover:text-gray-400"
-              href="https://www.youtube.com/watch?v=PKy2lYEnhgs&t=9479s"
-              rel="noopener noreferrer"
+              class="inline-flex gap-x-1.5 align-baseline leading-none hover:underline"
+              href="https://www.google.com/maps/place/Ithaca"
               target="_blank"
             >
-              a tutorial
-            </a> by Theo Browne. The database is hosted on PlanetScale and the site
-            is deployed on Vercel. The site is a simple Pokémon database that allows
-            users to vote on which Pokémon is the roundest. The project was a great
-            way to deepen my knowledge on Next.js and Tailwind, and also introduced
-            me to Prisma and tRPC.
+              <GlobeIcon className="h-3 w-3" />
+               Ithaca, NY
+            </a>
           </p>
-          <a
-            class="text-white hover:text-gray-400"
-            href="https://github.com/lucasdoell/roundest-mon"
-            rel="noopener noreferrer"
-            target="_blank"
+          <div
+            class="flex gap-x-1 pt-1 font-mono text-sm text-muted-foreground print:hidden"
           >
-            View on GitHub &rarr;
-          </a>
-        </li>
-      </ul>
-    </div>
+            <a href={`mailto:lucas@lux.dev`}>
+              <Button className="h-8 w-8" variant="outline" size="icon">
+                <MailIcon className="h-4 w-4" />
+              </Button>
+            </a>
+            <Button
+              key={"GitHub"}
+              className="h-8 w-8"
+              variant="outline"
+              size="icon"
+            >
+              <a href="https://github.com/lucasdoell">
+                <GitHubIcon className="h-4 w-4" />
+              </a>
+            </Button>
+            <Button
+              key={"LinkedIn"}
+              className="h-8 w-8"
+              variant="outline"
+              size="icon"
+            >
+              <a href="https://linkedin.com/in/lucasdoell">
+                <LinkedInIcon className="h-4 w-4" />
+              </a>
+            </Button>
+            <Button key={"X"} className="h-8 w-8" variant="outline" size="icon">
+              <a href="https://twitter.com/lucasdoell">
+                <XIcon className="h-4 w-4" />
+              </a>
+            </Button>
+          </div>
+        </div>
 
-    <!-- Coursework -->
-    <div class="py-8">
-      <h2 class="w-full border-b border-neutral-700 pb-2 text-white">
-        Coursework
-      </h2>
+        <div class="h-28 w-28">
+          <img
+            src="/images/linkedin.jpg"
+            class="rounded-xl"
+            alt="An AI-generated photo of Lucas."
+          />
+        </div>
+      </div>
+      <Section>
+        <h2 class="text-xl font-bold">About</h2>
+        <p class="text-pretty font-mono text-sm text-muted-foreground">
+          As a full-stack software engineer, I have built excellent user
+          experiences and robust backend systems at scale. I am passionate about
+          creating software that is both performant and user-friendly, and I
+          have experience working with a variety of technologies and programming
+          languages. I am currently seeking a full-time software engineering
+          position.
+        </p>
+      </Section>
+      <Section>
+        <h2 class="text-xl font-bold">Work Experience</h2>
+        <Card key={"Appstle"}>
+          <CardHeader>
+            <div class="flex items-center justify-between gap-x-2 text-base">
+              <h3
+                class="inline-flex items-center justify-center gap-x-1 font-semibold leading-none"
+              >
+                <a class="hover:underline" href="https://appstle.com">
+                  Appstle Inc.
+                </a>
 
-      <ul class="list-disc pl-6">
-        <li class="py-4">
-          <span class="text-white">
-            CS 3110 - Data Structures and Functional Programming
-          </span>
-          <p class="pb-4">
-            Advanced programming course that emphasizes functional programming
-            techniques and data structures. Programming topics include recursive
-            and higher-order procedures, models of programming language
-            evaluation and compilation, type systems, and polymorphism. Data
-            structures and algorithms covered include graph algorithms, balanced
-            trees, memory heaps, and garbage collection. Also covers techniques
-            for analyzing program performance and correctness.
-          </p>
-          <a
-            class="text-white hover:text-gray-400"
-            href="mailto:lucas@lucasdoell.com"
-          >
-            Code available on request &rarr;
-          </a>
-        </li>
-        <li class="py-4">
-          <span class="text-white">
-            CS 2110 - Object-Oriented Programming and Data Structures
-          </span>
-          <p class="pb-4">
-            Intermediate programming in a high-level language and introduction
-            to computer science. Topics include object-oriented programming
-            (classes, objects, subclasses, types), graphical user interfaces,
-            algorithm analysis (asymptotic complexity, big "O" notation),
-            recursion, testing, program correctness (loop invariants),
-            searching/sorting, data structures (lists, trees, stacks, queues,
-            heaps, search trees, hash tables, graphs), graph algorithms. Java is
-            the principal programming language.
-          </p>
-          <a
-            class="text-white hover:text-gray-400"
-            href="mailto:lucas@lucasdoell.com"
-          >
-            Code available on request &rarr;
-          </a>
-        </li>
-        <li class="py-4">
-          <span class="text-white">
-            CS 1110 - Intro to Computing using Python
-          </span>
-          <p class="pb-4">
-            Programming and problem solving using Python. Emphasizes principles
-            of software development, style, and testing. Topics include
-            procedures and functions, iteration, recursion, arrays and vectors,
-            strings, an operational model of procedure and function calls,
-            algorithms, exceptions, object-oriented programming. Weekly labs
-            provide guided practice on the computer, with staff present to help.
-          </p>
-          <a
-            class="text-white hover:text-gray-400"
-            href="mailto:lucas@lucasdoell.com"
-          >
-            Code available on request &rarr;
-          </a>
-        </li>
-      </ul>
-    </div>
-    <Footer />
+                <span class="hidden sm:inline-flex gap-x-1">
+                  <Badge variant="secondary" className="align-middle text-xs">
+                    Remote
+                  </Badge>
+                </span>
+              </h3>
+              <div class="text-sm tabular-nums text-gray-500">
+                February 2023 - December 2023
+              </div>
+            </div>
+
+            <h4 class="font-mono text-sm leading-none">Software Developer</h4>
+          </CardHeader>
+          <CardContent className="mt-2 text-xs">
+            At Appstle Inc., my role was multifaceted, focusing on developing
+            new features for over 30,000 merchants and engaging in full-stack
+            development using Java, TypeScript, and React. I refined our
+            software by refactoring React components and managing a substantial
+            codebase of over 500,000 lines. Additionally, I handled database
+            management tasks with MySQL and DynamoDB, and created specialized
+            internal tools for merchant-specific needs. My responsibilities also
+            included implementing and optimizing AWS Step Functions to ensure
+            robust and efficient task execution, underlining my comprehensive
+            involvement in both front and backend development. Outside of
+            programming, I also focused on reducing customer churn and
+            collecting analytics using Intercom to improve the user experience
+            and strengthen our retention strategies.
+          </CardContent>
+        </Card>
+      </Section>
+      <Section>
+        <h2 class="text-xl font-bold">Education</h2>
+        <Card key={"Cornell"}>
+          <CardHeader>
+            <div class="flex items-center justify-between gap-x-2 text-base">
+              <h3 class="font-semibold leading-none">Cornell University</h3>
+              <div class="text-sm tabular-nums text-gray-500">
+                August 2021 - December 2022
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent className="mt-2">
+            Bachelor's in Computer Science
+          </CardContent>
+        </Card>
+      </Section>
+      <Section>
+        <h2 class="text-xl font-bold">Skills</h2>
+        <div class="flex flex-wrap gap-1">
+          <Badge>JavaScript</Badge>
+          <Badge>TypeScript</Badge>
+          <Badge>Java</Badge>
+          <Badge>React</Badge>
+          <Badge>Next.js</Badge>
+          <Badge>Node.js</Badge>
+        </div>
+      </Section>
+
+      <Section className="print-force-new-page scroll-mb-16">
+        <h2 class="text-xl font-bold">Projects</h2>
+        <div
+          class="-mx-3 lg:grid grid-cols-1 gap-3 print:grid-cols-3 print:gap-2 md:grid-cols-2 lg:grid-cols-3"
+        >
+          <ProjectCard
+            title="Parsertime"
+            description="A web app written to help collegiate Overwatch players track their statistics."
+            tags={["Next.js", "Tailwind", "Prisma", "MySQL", "Vercel"]}
+            link="https://github.com/lucasdoell/parsertime"
+          />
+          <ProjectCard
+            title="Interpreter/Compiler"
+            description="An interpreter and compiler for a toy language built in both Go and Rust."
+            tags={["Go", "Rust", "Unit Testing"]}
+            link="https://github.com/lucasdoell"
+          />
+          <ProjectCard
+            title="OWL Bot"
+            description="A Discord bot written in TypeScript that fetches OWL stats and schedules."
+            tags={[
+              "Express",
+              "Discord.js",
+              "Web Scraping",
+              "Docker",
+              "Puppeteer",
+            ]}
+            link="https://github.com/lucasdoell/owlbot"
+          />
+          <ProjectCard
+            title="Sports Stats Web Scraper"
+            description="Final project for CS 3110. Written primarily in OCaml with testing in OUnit2."
+            tags={["OCaml", "OUnit2", "Web Scraping", "Python"]}
+            link="https://github.com/lucasdoell/CS3110-scraping"
+          />
+          <ProjectCard
+            title="Headless Shopify Store"
+            description="A headless Shopify e-commerce store built with Next.js and Tailwind CSS."
+            tags={["Next.js", "Tailwind", "Shopify"]}
+            link="https://github.com/lucasdoell/shopify-nextjs"
+          />
+          <ProjectCard
+            title="Roundest Pokemon"
+            description="Built with Next.js, Tailwind, Prisma, tRPC, and MySQL."
+            tags={["Next.js", "Tailwind", "Prisma", "MySQL", "tRPC", "Vercel"]}
+            link="https://github.com/lucasdoell/shopify-nextjs"
+          />
+        </div>
+      </Section>
+    </section>
   </main>
 </Layout>
