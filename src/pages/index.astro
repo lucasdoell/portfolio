@@ -9,15 +9,18 @@ import { ProjectCard } from "@/components/react/project-card";
 import { GitHubIcon } from "@/components/icons/GithubIcon";
 import { LinkedInIcon } from "@/components/icons/LinkedInIcon";
 import { XIcon } from "@/components/icons/XIcon";
+import { BlueskyIcon } from "@/components/icons/BlueskyIcon";
 import { ModeToggle } from "@/components/react/mode-toggle";
 import "@/styles/globals.css";
 ---
 
 <Layout title="Lucas Doell | Full-Stack Software Developer">
-  <div class="container relative lg:mx-auto scroll-my-12 overflow-auto py-4 px-4 md:px-0 w-full max-w-2xl">
-      <div class="float-right">
-        <ModeToggle client:load />
-      </div>
+  <div
+    class="container relative lg:mx-auto scroll-my-12 overflow-auto py-4 px-4 md:px-0 w-full max-w-2xl"
+  >
+    <div class="float-right">
+      <ModeToggle client:load />
+    </div>
   </div>
   <main
     class="container relative lg:mx-auto scroll-my-12 overflow-auto pb-4 px-4 print:p-12 md:pb-16 md:px-16"
@@ -61,7 +64,11 @@ import "@/styles/globals.css";
               variant="outline"
               size="icon"
             >
-              <a href="https://github.com/lucasdoell">
+              <a
+                href="https://github.com/lucasdoell"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <GitHubIcon className="h-4 w-4" />
               </a>
             </Button>
@@ -71,13 +78,35 @@ import "@/styles/globals.css";
               variant="outline"
               size="icon"
             >
-              <a href="https://linkedin.com/in/lucasdoell">
+              <a
+                href="https://linkedin.com/in/lucasdoell"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <LinkedInIcon className="h-4 w-4" />
               </a>
             </Button>
             <Button key={"X"} className="h-8 w-8" variant="outline" size="icon">
-              <a href="https://twitter.com/lucasdoell">
+              <a
+                href="https://twitter.com/lucasdoell"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <XIcon className="h-4 w-4" />
+              </a>
+            </Button>
+            <Button
+              key={"Bluesky"}
+              className="h-8 w-8"
+              variant="outline"
+              size="icon"
+            >
+              <a
+                href="https://bsky.app/profile/lux.dev"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <BlueskyIcon className="h-4 w-4" />
               </a>
             </Button>
           </div>
