@@ -1,49 +1,49 @@
-# Welcome to [Astro](https://astro.build)
+# Lucas's Portfolio Website
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/s/github/withastro/astro/tree/latest/examples/basics)
+## Introduction
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+This is the source code for my personal portfolio website. It's built using Astro, a modern static site generator, with React for interactive components, and styled with Tailwind CSS. The website showcases my skills, projects, and professional journey as a web developer.
 
-![basics](https://user-images.githubusercontent.com/4677417/186188965-73453154-fdec-4d6b-9c34-cb35c248ae5b.png)
+## Features
 
-## 🚀 Project Structure
+- **Static Site Generation**: Utilizes Astro for optimal performance and SEO.
+- **React Integration**: For dynamic and interactive UI components.
+- **Responsive Design**: Fully responsive interface using Tailwind CSS.
+- **Portfolio Showcase**: Sections for projects, skills, and professional experience.
 
-Inside of your Astro project, you'll see the following folders and files:
+## Tech Stack
 
-```
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+- **Static Site Generator**: Astro
+- **UI Library**: React
+- **CSS Framework**: Tailwind CSS
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Getting Started
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
 
-Any static assets, like images, can be placed in the `public/` directory.
+### Prerequisites
 
-## 🧞 Commands
+- Node.js
+- pnpm
 
-All commands are run from the root of the project, from a terminal:
+### Installation
 
-| Command                | Action                                             |
-| :--------------------- | :------------------------------------------------- |
-| `npm install`          | Installs dependencies                              |
-| `npm run dev`          | Starts local dev server at `localhost:3000`        |
-| `npm run build`        | Build your production site to `./dist/`            |
-| `npm run preview`      | Preview your build locally, before deploying       |
-| `npm run astro ...`    | Run CLI commands like `astro add`, `astro preview` |
-| `npm run astro --help` | Get help using the Astro CLI                       |
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/lucasdoell/portfolio.git
+   ```
+2. Install the dependencies:
+   ```sh
+   pnpm install
+   ```
+3. Start the development server:
+   ```sh
+   pnpm dev
+   ```
+4. Open `http://localhost:4321` to view it in the browser.
 
-## 👀 Want to learn more?
+## Acknowledgements
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- [Astro](https://astro.build/)
+- [React](https://reactjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
