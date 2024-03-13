@@ -141,13 +141,10 @@ import "@/styles/globals.css";
         <Card key={"Appstle"}>
           <CardHeader>
             <div class="flex items-center justify-between gap-x-2 text-base">
-              <h3
-                class="inline-flex items-center justify-center gap-x-1 font-semibold leading-none"
-              >
+              <h3 class="inline-flex items-center justify-center gap-x-1 font-semibold leading-none">
                 <a class="hover:underline" href="https://appstle.com">
                   Appstle Inc.
                 </a>
-
                 <span class="hidden sm:inline-flex gap-x-1">
                   <Badge variant="secondary" className="align-middle text-xs">
                     Remote
@@ -158,7 +155,6 @@ import "@/styles/globals.css";
                 February 2023 - December 2023
               </div>
             </div>
-
             <h4 class="font-mono text-sm leading-none">Software Developer</h4>
           </CardHeader>
           <CardContent className="mt-2 text-xs">
@@ -175,6 +171,36 @@ import "@/styles/globals.css";
             programming, I also focused on reducing customer churn and
             collecting analytics using Intercom to improve the user experience
             and strengthen our retention strategies.
+          </CardContent>
+        </Card>
+        <Card key={"lux"}>
+          <CardHeader>
+            <div class="flex items-center justify-between gap-x-2 text-base">
+              <h3 class="inline-flex items-center justify-center gap-x-1 font-semibold leading-none">
+                <a class="hover:underline" href="https://github.com/luxdotdev">
+                  lux.dev
+                </a>
+              </h3>
+              <div class="text-sm tabular-nums text-gray-500">
+                November 2023 - Present
+              </div>
+            </div>
+            <h4 class="font-mono text-sm leading-none">Founder</h4>
+          </CardHeader>
+          <CardContent className="mt-2 text-xs">
+            I am the founder of lux.dev, a software development company that
+            specializes in building web applications for data visualization and
+            analytics. My current focus is on Parsertime, a web app that helps
+            collegiate Overwatch players track their statistics. This project
+            has allowed me to refine my skills in full-stack development using
+            Next.js, Tailwind, Prisma, and Postgres. You can check out the project
+            <a href="https://parsertime.app" class="text-blue-500" target="_blank">
+              here
+            </a> 
+            or view the source code
+            <a href="https://github.com/luxdotdev/parsertime" class="text-blue-500" target="_blank">
+              here.
+            </a>
           </CardContent>
         </Card>
       </Section>
@@ -214,8 +240,8 @@ import "@/styles/globals.css";
           <ProjectCard
             title="Parsertime"
             description="A web app written to help collegiate Overwatch players track their statistics."
-            tags={["Next.js", "Tailwind", "Prisma", "MySQL", "Vercel"]}
-            link="https://github.com/lucasdoell/parsertime"
+            tags={["Next.js", "Tailwind", "Prisma", "Postgres", "Vercel"]}
+            link="https://github.com/luxdotdev/parsertime"
           />
           <ProjectCard
             title="Interpreter/Compiler"
