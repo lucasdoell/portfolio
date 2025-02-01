@@ -1,22 +1,32 @@
+---
+import Background from "../components/Background.astro";
+import "../styles/global.css";
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Lucas Doell | Software Engineer, CS @ Cornell</title>
+  </head>
+  <body class="min-h-screen bg-black relative">
+    <Background
+      maskX={100}
+      maskY={0}
+      maskRadius={100}
+      gradientX={100}
+      gradientY={60}
+      gradientWidth={70}
+      gradientHeight={50}
+      gradientTilt={-40}
+      gradientOpacity={90}
+      gridOpacity={100}
+    />
+    <main class="relative z-10">
+      <slot />
+    </main>
+  </body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

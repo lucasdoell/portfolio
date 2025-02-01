@@ -1,0 +1,85 @@
+---
+interface Props {
+  class?: string;
+  maskX?: number;
+  maskY?: number;
+  maskRadius?: number;
+  gradientX?: number;
+  gradientY?: number;
+  gradientWidth?: number;
+  gradientHeight?: number;
+  gradientTilt?: number;
+  gradientOpacity?: number;
+  gridOpacity?: number;
+}
+
+const {
+  class: className,
+  maskX = 100,
+  maskY = 0,
+  maskRadius = 100,
+  gradientX = 100,
+  gradientY = 60,
+  gradientWidth = 70,
+  gradientHeight = 50,
+  gradientTilt = -40,
+  gradientOpacity = 90,
+  gridOpacity = 100,
+} = Astro.props;
+
+// Remap gradient position to account for the larger size
+function remapGradientPosition(value: number): number {
+  return ((value - 0) / (100 - 0)) * (62.5 - 37.5) + 37.5;
+}
+
+const adjustedGradientX = remapGradientPosition(gradientX);
+const adjustedGradientY = remapGradientPosition(gradientY);
+---
+
+<div class:list={["absolute inset-0 overflow-hidden", className]}>
+  {/* Mask Layer */}
+  <div
+    class="absolute inset-0"
+    style={{
+      maskImage: `radial-gradient(${maskRadius}vh at ${maskX}% ${maskY}%, black 0%, transparent 100%)`,
+      WebkitMaskImage: `radial-gradient(${maskRadius}vh at ${maskX}% ${maskY}%, black 0%, transparent 100%)`,
+    }}
+  >
+    {/* Gradient Background */}
+    <div
+      class="absolute w-[400%] h-[400%] -left-[150%] -top-[150%] pointer-events-none origin-center"
+      style={{
+        opacity: gradientOpacity / 100,
+        transform: `rotate(${gradientTilt}deg)`,
+        background: `radial-gradient(
+          ellipse ${gradientWidth / 4}% ${gradientHeight / 4}% at ${adjustedGradientX}% ${adjustedGradientY}%,
+          #094074 0%,
+          transparent 100%
+        )`,
+      }}
+    >
+    </div>
+
+    {/* Grid Pattern */}
+    <div
+      class="absolute inset-0 pointer-events-none"
+      style={{
+        opacity: gridOpacity / 100,
+        backgroundImage: `
+          linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0, rgba(255, 255, 255, 0.1) 1px, transparent 1px, transparent 0.25rem),
+          linear-gradient(0deg, rgba(255, 255, 255, 0.1) 0, rgba(255, 255, 255, 0.1) 1px, transparent 1px, transparent 0.25rem)
+        `,
+        backgroundSize: "0.25rem 0.25rem",
+      }}
+    >
+    </div>
+  </div>
+</div>
+
+<style>
+  :root {
+    --page-background: 0 0 0;
+    --accent-background-strong: 9 64 116; /* #094074 in RGB */
+    --neutral-alpha-medium: 200 200 200;
+  }
+</style>
