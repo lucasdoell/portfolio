@@ -1,0 +1,29 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<section
+  class:list={["relative w-full max-w-5xl mx-auto px-8 py-24", className]}
+>
+  {/* Card Background */}
+  <div
+    class="absolute inset-0 bg-black/80 backdrop-blur-sm border border-white/10"
+  >
+  </div>
+
+  {/* Content */}
+  <div class="relative z-10 text-center px-6 py-16">
+    <slot />
+  </div>
+</section>
+
+<style>
+  section {
+    /* Add a subtle shadow to help it stand out */
+    box-shadow: 0 0 80px -20px rgba(9, 64, 116, 0.3);
+  }
+</style>
