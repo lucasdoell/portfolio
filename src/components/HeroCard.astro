@@ -1,7 +1,4 @@
 ---
-import { Image } from "astro:assets";
-import portrait from "./assets/portrait.jpg";
-
 interface Props {
   class?: string;
 }
@@ -74,8 +71,8 @@ const { class: className } = Astro.props;
 
       {/* Image */}
       <div class="relative flex-shrink-0 w-full md:w-[320px] h-[360px]">
-        <Image
-          src={portrait}
+        <img
+          src="./assets/portrait.jpg"
           alt="Lucas Doell"
           class="w-full h-full object-cover"
         />
