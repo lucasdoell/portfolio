@@ -1,5 +1,5 @@
 ---
-import Background from "../components/Background.astro";
+import Background from "../components/Background";
 import Nav from "../components/Nav.astro";
 import "../styles/global.css";
 ---
@@ -14,14 +14,7 @@ import "../styles/global.css";
     <title>Lucas Doell | Software Engineer, CS @ Cornell</title>
   </head>
   <body class="min-h-screen bg-black">
-    <Background
-      client:load
-      gradientWidth={70}
-      gradientHeight={50}
-      gradientTilt={-40}
-      gradientOpacity={90}
-      gridOpacity={100}
-    />
+    <Background client:load />
     <Nav />
     <main class="relative z-10 min-h-screen px-4 pt-20">
       <slot />
