@@ -1,6 +1,7 @@
 ---
+import ProjectSection from "@/components/ProjectSection";
 import HeroCard from "../components/HeroCard.astro";
-import ProjectSection from "../components/ProjectSection.astro";
+// import ProjectSection from "../components/ProjectSection.astro";
 import Layout from "../layouts/Layout.astro";
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
@@ -12,5 +13,5 @@ import Layout from "../layouts/Layout.astro";
     <HeroCard />
   </div>
 
-  <ProjectSection />
+  <ProjectSection client:load />
 </Layout>
