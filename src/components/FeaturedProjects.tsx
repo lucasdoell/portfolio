@@ -38,7 +38,7 @@ export function FeaturedProjects({
             className="group relative bg-black/40 backdrop-blur-sm border border-white/10 rounded-lg overflow-hidden"
           >
             {/* Carousel section with responsive horizontal padding */}
-            <div className="mb-6 px-0 lg:px-6">
+            <div className="mb-6 px-0 lg:px-6 lg:pt-6">
               <EmblaCarouselWrapper images={project.images!} />
             </div>
             {/* Text content container with responsive padding */}

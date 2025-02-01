@@ -22,7 +22,7 @@ export function BentoBoxProjects({ projects }: BentoBoxProjectsProps) {
   if (noImageProjects.length === 0) return null;
 
   return (
-    <section className="py-12 max-w-5xl mx-auto">
+    <section className="py-12 max-w-5xl mx-auto px-8 xl:px-0 pt-24">
       <h2 className="text-2xl font-bold text-white mb-6 text-center">
         Other Projects
       </h2>
@@ -55,7 +55,7 @@ export function BentoBoxProjects({ projects }: BentoBoxProjectsProps) {
                     href={project.caseStudyUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-[#094074] hover:text-blue-400 transition-colors text-sm inline-flex items-center"
+                    className="text-blue-500 hover:text-blue-400 transition-colors text-sm inline-flex items-center"
                   >
                     Read case study
                     <svg
@@ -76,7 +76,7 @@ export function BentoBoxProjects({ projects }: BentoBoxProjectsProps) {
                     href={project.projectUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-[#094074] hover:text-blue-400 transition-colors text-sm inline-flex items-center"
+                    className="text-blue-500 hover:text-blue-400 transition-colors text-sm inline-flex items-center"
                   >
                     View project
                     <svg
