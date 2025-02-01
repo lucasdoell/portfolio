@@ -29,6 +29,7 @@ export function FeaturedProjects({
       className={`w-full max-w-5xl mx-auto px-8 xl:px-0 pt-24 ${
         className || ""
       }`}
+      id="work"
     >
       <h2 className="text-2xl font-bold text-white mb-12">Featured Projects</h2>
       <div className="flex flex-col gap-12">
