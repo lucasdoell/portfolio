@@ -1,11 +1,7 @@
 ---
 interface Props {
   class?: string;
-  maskX?: number;
-  maskY?: number;
   maskRadius?: number;
-  gradientX?: number;
-  gradientY?: number;
   gradientWidth?: number;
   gradientHeight?: number;
   gradientTilt?: number;
@@ -15,47 +11,34 @@ interface Props {
 
 const {
   class: className,
-  maskX = 100,
-  maskY = 0,
-  maskRadius = 100,
-  gradientX = 100,
-  gradientY = 60,
+  maskRadius = 50,
   gradientWidth = 70,
   gradientHeight = 50,
   gradientTilt = -40,
   gradientOpacity = 90,
   gridOpacity = 100,
 } = Astro.props;
-
-// Remap gradient position to account for the larger size
-function remapGradientPosition(value: number): number {
-  return ((value - 0) / (100 - 0)) * (62.5 - 37.5) + 37.5;
-}
-
-const adjustedGradientX = remapGradientPosition(gradientX);
-const adjustedGradientY = remapGradientPosition(gradientY);
 ---
 
-<div class:list={["absolute inset-0 overflow-hidden", className]}>
+<div
+  id="animated-background"
+  class:list={["absolute inset-0 overflow-hidden", className]}
+  style={{
+    "--mask-radius": `${maskRadius}vh`,
+    "--gradient-width": `${gradientWidth / 4}%`,
+    "--gradient-height": `${gradientHeight / 4}%`,
+    "--gradient-tilt": `${gradientTilt}deg`,
+  }}
+>
   {/* Mask Layer */}
-  <div
-    class="absolute inset-0"
-    style={{
-      maskImage: `radial-gradient(${maskRadius}vh at ${maskX}% ${maskY}%, black 0%, transparent 100%)`,
-      WebkitMaskImage: `radial-gradient(${maskRadius}vh at ${maskX}% ${maskY}%, black 0%, transparent 100%)`,
-    }}
-  >
+  <div class="absolute inset-0 mask-layer">
     {/* Gradient Background */}
     <div
-      class="absolute w-[400%] h-[400%] -left-[150%] -top-[150%] pointer-events-none origin-center"
+      id="gradient-layer"
+      class="absolute w-[400%] h-[400%] -left-[150%] -top-[150%] pointer-events-none origin-center transition-transform duration-75"
       style={{
         opacity: gradientOpacity / 100,
         transform: `rotate(${gradientTilt}deg)`,
-        background: `radial-gradient(
-          ellipse ${gradientWidth / 4}% ${gradientHeight / 4}% at ${adjustedGradientX}% ${adjustedGradientY}%,
-          #094074 0%,
-          transparent 100%
-        )`,
       }}
     >
     </div>
@@ -77,9 +60,84 @@ const adjustedGradientY = remapGradientPosition(gradientY);
 </div>
 
 <style>
-  :root {
-    --page-background: 0 0 0;
-    --accent-background-strong: 9 64 116; /* #094074 in RGB */
-    --neutral-alpha-medium: 200 200 200;
+  .mask-layer {
+    mask-image: radial-gradient(
+      var(--mask-radius) at var(--mask-position-x, 50%)
+        var(--mask-position-y, 50%),
+      black 0%,
+      transparent 100%
+    );
+    -webkit-mask-image: radial-gradient(
+      var(--mask-radius) at var(--mask-position-x, 50%)
+        var(--mask-position-y, 50%),
+      black 0%,
+      transparent 100%
+    );
+  }
+
+  #gradient-layer {
+    background: radial-gradient(
+      circle at var(--gradient-position-x, 50%) var(--gradient-position-y, 50%),
+      #094074 0%,
+      transparent 100%
+    );
   }
 </style>
+
+<script>
+  function lerp(start: number, end: number, factor: number): number {
+    return start + (end - start) * factor;
+  }
+
+  const background = document.getElementById("animated-background");
+  const gradient = document.getElementById("gradient-layer");
+  let currentX = 0;
+  let currentY = 0;
+  let targetX = 0;
+  let targetY = 0;
+
+  function updateGradientPosition() {
+    if (!background || !gradient) return;
+
+    // Smooth out the movement
+    currentX = lerp(currentX, targetX, 0.05);
+    currentY = lerp(currentY, targetY, 0.05);
+
+    // Update CSS custom properties for both mask and gradient
+    background.style.setProperty("--mask-position-x", `${currentX}px`);
+    background.style.setProperty("--mask-position-y", `${currentY}px`);
+    background.style.setProperty(
+      "--gradient-position-x",
+      `${(currentX / background.offsetWidth) * 100}%`
+    );
+    background.style.setProperty(
+      "--gradient-position-y",
+      `${(currentY / background.offsetHeight) * 100}%`
+    );
+
+    requestAnimationFrame(updateGradientPosition);
+  }
+
+  function handleMouseMove(event: MouseEvent) {
+    if (!background) return;
+
+    const rect = background.getBoundingClientRect();
+    targetX = event.clientX - rect.left;
+    targetY = event.clientY - rect.top;
+  }
+
+  // Initialize animation
+  requestAnimationFrame(updateGradientPosition);
+
+  // Add event listener with throttling
+  let lastTime = 0;
+  const throttleInterval = 1000 / 60; // 60fps
+
+  document.addEventListener("mousemove", (event) => {
+    const now = performance.now();
+    if (now - lastTime >= throttleInterval) {
+      handleMouseMove(event);
+      lastTime = now;
+    }
+  });
+</script>
