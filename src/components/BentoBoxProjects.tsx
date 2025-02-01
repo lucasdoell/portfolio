@@ -23,9 +23,7 @@ export function BentoBoxProjects({ projects }: BentoBoxProjectsProps) {
 
   return (
     <section className="py-12 max-w-5xl mx-auto px-8 xl:px-0 pt-24">
-      <h2 className="text-2xl font-bold text-white mb-6 text-center">
-        Other Projects
-      </h2>
+      <h2 className="text-2xl font-bold text-white mb-6">Other Projects</h2>
       <div className="mt-6 grid gap-4 sm:mt-8 lg:grid-cols-3 lg:grid-rows-2">
         {noImageProjects.map((project, idx) => {
           // When there are exactly 4 projects, apply custom grid placement.
