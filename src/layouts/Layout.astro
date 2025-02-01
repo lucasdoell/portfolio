@@ -13,11 +13,18 @@ import "../styles/global.css";
     <meta name="generator" content={Astro.generator} />
     <title>Lucas Doell | Software Engineer, CS @ Cornell</title>
   </head>
-  <body class="min-h-screen bg-black">
-    <Background client:load />
-    <Nav />
-    <main class="relative z-10 min-h-screen px-4 pt-20">
-      <slot />
-    </main>
+  <body class="bg-black">
+    {/* Fixed position background that covers entire scrollable area */}
+    <div class="fixed inset-0 w-full">
+      <Background client:load />
+    </div>
+
+    {/* Main content wrapper */}
+    <div class="relative min-h-screen w-full">
+      <Nav />
+      <main class="relative z-10 w-full">
+        <slot />
+      </main>
+    </div>
   </body>
 </html>
