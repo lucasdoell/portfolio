@@ -1,0 +1,84 @@
+---
+interface Props {
+  class?: string;
+}
+
+interface WorkExperience {
+  title: string;
+  company: string;
+  duration: string;
+  description: string[];
+}
+
+const { class: className } = Astro.props;
+
+const experiences: WorkExperience[] = [
+  {
+    title: "Founder, Lead Engineer",
+    company: "lux.dev LLC",
+    duration: "Nov 2023 - Present",
+    description: [
+      "Launched Parsertime, an open-source app for Overwatch 2 data visualization, reaching 500+ users in its first few months.",
+      "Developed and managed custom analytics and team management features, processing 235,000 player kills and 150,000 player statistics across 100 teams.",
+      "Led and educated a team of interns to develop software with React, Next.js, Tailwind, and PostgreSQL.",
+      "Provided community support and troubleshooting via Discord, improving user satisfaction.",
+      "Authored technical docs to guide users on features, analytics setup, and issue resolution.",
+    ],
+  },
+  {
+    title: "Full-Stack Software Engineer",
+    company: "Appstle Inc.",
+    duration: "Feb 2023 - Dec 2023",
+    description: [
+      "Built new commerce features for 30,000+ Shopify merchants.",
+      "Redesigned analytics for improved UX, reducing customer service interactions.",
+      "Leveraged Intercom customer outreach platform to reduce churn and lower subscription cancellations.",
+      "Wrote and maintained clean code in Java and TypeScript for backend and frontend.",
+      "Migrated legacy code from JavaScript to TypeScript, reducing bugs and boosting development speed.",
+      "Developed internal tools to customize features for enterprise merchants.",
+    ],
+  },
+  {
+    title: "Connectivity Expert",
+    company: "AT&T Inc.",
+    duration: "May 2024 - Feb 2025",
+    description: [
+      "Effectively presented products and services to and develop relationships with potential clients.",
+      "Exceeded sales goals by selling products and services to new and existing customers, consistently being a top performer in the upstate New York market.",
+      "Stayed up to date with product knowledge, accessories, pricing plans, promotions, and service features.",
+      "Prospected and built relationships with local small businesses to increase outreach.",
+    ],
+  },
+];
+---
+
+<section
+  class:list={["w-full max-w-5xl mx-auto px-8 xl:px-0 pt-24", className]}
+  id="experience"
+>
+  <h2 class="text-2xl font-bold text-white mb-12">Work Experience</h2>
+  <div class="space-y-8">
+    {
+      experiences.map((experience) => (
+        <article class="group relative bg-black/40 backdrop-blur-sm border border-white/10 rounded-lg overflow-hidden p-6 transition-all duration-300 hover:bg-black/50">
+          <header class="mb-4">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
+              <h3 class="text-xl font-bold text-white">
+                {experience.title}
+                <span class="text-blue-400 ml-2">@ {experience.company}</span>
+              </h3>
+              <time class="text-gray-400 text-sm">{experience.duration}</time>
+            </div>
+          </header>
+          <ul class="space-y-2">
+            {experience.description.map((bullet) => (
+              <li class="text-gray-400 text-base relative pl-6 before:content-[''] before:absolute before:left-0 before:top-[0.6em] before:w-1.5 before:h-1.5 before:bg-blue-400 before:rounded-full">
+                {bullet}
+              </li>
+            ))}
+          </ul>
+        </article>
+      ))
+    }
+  </div>
+</section>
