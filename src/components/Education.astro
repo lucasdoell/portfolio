@@ -1,0 +1,89 @@
+---
+interface Props {
+  class?: string;
+}
+
+interface EducationDetail {
+  text: string;
+  subItems?: string[];
+}
+
+interface Education {
+  school: string;
+  degree: string;
+  duration: string;
+  location: string;
+  details: EducationDetail[];
+}
+
+const { class: className } = Astro.props;
+
+const education: Education[] = [
+  {
+    school: "Cornell University",
+    degree: "Bachelor of Arts in Computer Science",
+    duration: "Aug 2021 - Present",
+    location: "Ithaca, NY",
+    details: [
+      {
+        text: "Minor in Artificial Intelligence",
+      },
+      {
+        text: "Relevant coursework includes:",
+        subItems: [
+          "Introduction to Computing using Python",
+          "Object-Oriented Programming and Data Structures",
+          "Data Structures and Functional Programming",
+          "Introductory Design and Programming for the Web",
+          "Mathematical Foundations of Computing",
+        ],
+      },
+    ],
+  },
+];
+---
+
+<section
+  class:list={["w-full max-w-5xl mx-auto px-8 xl:px-0 pt-24", className]}
+  id="education"
+>
+  <h2 class="text-2xl font-bold text-white mb-12">Education</h2>
+  <div class="space-y-8">
+    {
+      education.map((edu) => (
+        <article class="group relative bg-black/40 backdrop-blur-sm border border-white/10 rounded-lg overflow-hidden p-6 transition-all duration-300 hover:bg-black/50">
+          <header class="mb-4">
+            <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
+              <div>
+                <h3 class="text-xl font-bold text-white">{edu.school}</h3>
+                <p class="text-red-500">{edu.degree}</p>
+              </div>
+              <div class="flex flex-col sm:text-right">
+                <time class="text-gray-400 text-sm">{edu.duration}</time>
+                <span class="text-gray-400 text-sm">{edu.location}</span>
+              </div>
+            </div>
+          </header>
+          <ul class="space-y-2">
+            {edu.details.map((detail) => (
+              <li>
+                <div class="text-gray-400 text-base relative pl-6 before:content-[''] before:absolute before:left-0 before:top-[0.6em] before:w-1.5 before:h-1.5 before:bg-red-500 before:rounded-full">
+                  {detail.text}
+                </div>
+                {detail.subItems && (
+                  <ul class="mt-2 ml-6 space-y-1">
+                    {detail.subItems.map((subItem) => (
+                      <li class="text-gray-400 text-base relative pl-6 before:content-[''] before:absolute before:left-0 before:top-[0.6em] before:w-1 before:h-1 before:bg-red-300 before:rounded-full">
+                        {subItem}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ul>
+        </article>
+      ))
+    }
+  </div>
+</section>
