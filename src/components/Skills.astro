@@ -1,0 +1,42 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const skills = [
+  "React.js",
+  "TypeScript",
+  "Next.js",
+  "Node.js",
+  "Data Visualization",
+];
+---
+
+<section
+  class:list={["w-full max-w-5xl mx-auto px-8 xl:px-0 pt-24", className]}
+  id="skills"
+>
+  <h2 class="text-2xl font-bold text-white mb-8">Skills</h2>
+  <div class="flex flex-wrap gap-3">
+    {
+      skills.map((skill) => (
+        <div
+          class="px-4 py-2 bg-gray-700/50 backdrop-blur-sm rounded-lg 
+               border border-white/10 text-white font-mono text-sm
+               transition-colors duration-300 hover:bg-gray-600/50"
+        >
+          {skill}
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .font-mono {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      "Liberation Mono", "Courier New", monospace;
+  }
+</style>
