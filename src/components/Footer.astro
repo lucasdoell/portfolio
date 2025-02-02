@@ -1,0 +1,22 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class:list={["w-full max-w-5xl mx-auto px-8 xl:px-0 py-16", className]}>
+  <div class="text-gray-400 text-sm">
+    <p>
+      &copy; {currentYear} Lucas Doell. The source code is available on <a
+        href="https://github.com/lucasdoell/portfolio"
+        target="_blank"
+        rel="noreferrer"
+        class="underline">GitHub</a
+      >.
+    </p>
+  </div>
+</footer>
