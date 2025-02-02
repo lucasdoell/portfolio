@@ -54,7 +54,7 @@ export function FeaturedProjects({
               <div className="flex gap-6">
                 <a
                   href={project.caseStudyUrl}
-                  className="text-[#094074] hover:text-blue-400 transition-colors text-sm inline-flex items-center"
+                  className="text-blue-500 hover:text-blue-400 transition-colors text-sm inline-flex items-center"
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -69,7 +69,7 @@ export function FeaturedProjects({
                 </a>
                 <a
                   href={project.projectUrl}
-                  className="text-[#094074] hover:text-blue-400 transition-colors text-sm inline-flex items-center"
+                  className="text-blue-500 hover:text-blue-400 transition-colors text-sm inline-flex items-center"
                   target="_blank"
                   rel="noreferrer"
                 >
