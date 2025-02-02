@@ -26,7 +26,7 @@ export function FeaturedProjects({
 
   return (
     <section
-      className={`w-full max-w-5xl mx-auto px-8 xl:px-0 pt-24 ${
+      className={`w-full max-w-5xl mx-auto px-8 xl:px-0 pt-20 ${
         className || ""
       }`}
       id="work"
