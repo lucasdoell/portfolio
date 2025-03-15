@@ -30,6 +30,15 @@ const projects: Project[] = [
     projectUrl: "https://github.com/lucasdoell/cassini",
   },
   {
+    title: "CaffTrack (Hackathon Project)",
+    subtitle: "February 2025-Present",
+    description:
+      "Developed a caﬀeine tracking app in a three-person team for Cornell's Big Red Makeathon, using Vite, React, Django, Cloudflare R2, and Google Gemini. Awarded ”Best Software” for innovation and execution.",
+    images: ["/cafftrack_1.png", "/cafftrack_2.png", "/cafftrack_3.png"],
+    caseStudyUrl: "https://caffeine.lucasdoell.dev/",
+    projectUrl: "https://github.com/lucasdoell/cafftrack",
+  },
+  {
     title: "OWL Bot",
     subtitle: "March 2023-July 2023",
     description:
