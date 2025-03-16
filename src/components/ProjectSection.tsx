@@ -31,7 +31,7 @@ const projects: Project[] = [
   },
   {
     title: "CaffTrack (Hackathon Project)",
-    subtitle: "February 2025-Present",
+    subtitle: "February 2025-February 2025",
     description:
       "Developed a caﬀeine tracking app in a three-person team for Cornell's Big Red Makeathon, using Vite, React, Django, Cloudflare R2, and Google Gemini. Awarded ”Best Software” for innovation and execution.",
     images: ["/cafftrack_1.png", "/cafftrack_2.png", "/cafftrack_3.png"],
