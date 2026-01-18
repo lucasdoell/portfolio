@@ -57,6 +57,10 @@ export function BentoBoxProjects({ projects }: BentoBoxProjectsProps) {
           </article>
         ))}
       </div>
+
+      <div className="text-gray-600 dark:text-gray-400 text-center mt-8">
+        See more of my work on my <a href="https://github.com/lucasdoell" target="_blank" rel="noreferrer" className="text-black dark:text-white">GitHub</a>.
+      </div>
     </section>
   );
 }
