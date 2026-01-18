@@ -1,10 +1,8 @@
-// BentoBoxProjects.tsx
-
 interface Project {
   title: string;
   subtitle: string;
   description: string;
-  images?: string[]; // Optional images property
+  images?: string[];
   caseStudyUrl: string;
   projectUrl: string;
 }
@@ -14,89 +12,50 @@ interface BentoBoxProjectsProps {
 }
 
 export function BentoBoxProjects({ projects }: BentoBoxProjectsProps) {
-  // Filter projects that have no images.
-  const noImageProjects = projects.filter(
-    (project) => !project.images || project.images.length === 0
-  );
-
-  if (noImageProjects.length === 0) return null;
-
   return (
-    <section className="py-12 max-w-5xl mx-auto px-8 xl:px-0 pt-24">
-      <h2 className="text-2xl font-bold text-white mb-6">Other Projects</h2>
-      <div className="mt-6 grid gap-4 sm:mt-8 lg:grid-cols-3 lg:grid-rows-2">
-        {noImageProjects.map((project, idx) => {
-          // When there are exactly 4 projects, apply custom grid placement.
-          let gridClasses = "relative";
-          if (noImageProjects.length === 4) {
-            if (idx === 0) gridClasses = "relative lg:row-span-2";
-            else if (idx === 1) gridClasses = "relative lg:row-start-1";
-            else if (idx === 2)
-              gridClasses = "relative lg:col-start-2 lg:row-start-2";
-            else if (idx === 3) gridClasses = "relative lg:row-span-2";
-          }
-          return (
-            <div
-              key={idx}
-              className={`${gridClasses} bg-black/40 backdrop-blur-sm border border-white/10 rounded-lg p-6`}
-            >
-              <h3 className="text-xl font-bold text-white mb-2">
-                {project.title}
-              </h3>
-              <p className="text-gray-400 mb-2">{project.subtitle}</p>
-              <p className="text-gray-500 text-sm mb-4">
-                {project.description}
-              </p>
-              <div className="flex gap-4">
-                {project.caseStudyUrl !== "#" && (
-                  <a
-                    href={project.caseStudyUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-blue-500 hover:text-blue-400 transition-colors text-sm inline-flex items-center"
-                  >
-                    Read case study
-                    <svg
-                      className="w-4 h-4 ml-1"
-                      viewBox="0 0 16 16"
-                      fill="none"
-                    >
-                      <path
-                        d="M6.5 3.5L11 8L6.5 12.5"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                      />
-                    </svg>
-                  </a>
-                )}
-                {project.projectUrl !== "#" && (
-                  <a
-                    href={project.projectUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-blue-500 hover:text-blue-400 transition-colors text-sm inline-flex items-center"
-                  >
-                    View project
-                    <svg
-                      className="w-4 h-4 ml-1"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M7 17L17 7M17 7H8M17 7V16"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </a>
-                )}
-              </div>
+    <section className="py-24 max-w-5xl mx-auto px-8 xl:px-0" id="work">
+      <h2 className="text-3xl font-bold text-gray-950 dark:text-gray-50 mb-12">
+        Projects
+      </h2>
+      <div className="grid gap-8 sm:grid-cols-2">
+        {projects.map((project, idx) => (
+          <article
+            key={idx}
+            className="border border-gray-200 dark:border-gray-800 p-8 hover:border-gray-950 dark:hover:border-gray-50 focus-within:border-gray-950 dark:focus-within:border-gray-50 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-gray-950 dark:focus-within:outline-gray-50 transition-colors"
+          >
+            <h3 className="text-xl font-bold text-gray-950 dark:text-gray-50 mb-2">
+              {project.title}
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400 mb-3">
+              {project.subtitle}
+            </p>
+            <p className="text-gray-600 dark:text-gray-400 text-sm mb-6 leading-relaxed">
+              {project.description}
+            </p>
+            <div className="flex gap-6">
+              {project.caseStudyUrl !== "#" && (
+                <a
+                  href={project.caseStudyUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-neutral-700 dark:text-neutral-400 hover:text-gray-950 dark:hover:text-gray-50 transition-colors underline underline-offset-2 text-sm"
+                >
+                  Read case study →
+                </a>
+              )}
+              {project.projectUrl !== "#" && (
+                <a
+                  href={project.projectUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-neutral-700 dark:text-neutral-400 hover:text-gray-950 dark:hover:text-gray-50 transition-colors underline underline-offset-2 text-sm"
+                >
+                  View project ↗
+                </a>
+              )}
             </div>
-          );
-        })}
+          </article>
+        ))}
       </div>
     </section>
   );
