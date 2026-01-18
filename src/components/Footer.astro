@@ -8,14 +8,17 @@ const { class: className } = Astro.props;
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class:list={["w-full max-w-5xl mx-auto px-8 xl:px-0 py-16", className]}>
-  <div class="text-gray-400 text-sm">
+<footer
+  class:list={["w-full max-w-5xl mx-auto px-8 xl:px-0 py-16 border-t border-gray-200 dark:border-gray-800", className]}
+>
+  <div class="text-gray-600 dark:text-gray-400 text-sm">
     <p>
-      &copy; {currentYear} Lucas Doell. The source code is available on <a
+      © {currentYear} Lucas Doell. The source code is available on <a
         href="https://github.com/lucasdoell/portfolio"
         target="_blank"
         rel="noreferrer"
-        class="underline">GitHub</a
+        class="underline hover:text-gray-950 dark:hover:text-gray-50 transition-colors"
+        >GitHub</a
       >.
     </p>
   </div>
