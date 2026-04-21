@@ -1,18 +1,101 @@
 @import "tailwindcss";
 
-/* System font stack for performance and clarity */
-* {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+/* Switzer — Indian Type Foundry. Grotesk, display + body. */
+@font-face {
+  font-family: "Switzer";
+  src: url("/fonts/Switzer-Variable.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Switzer";
+  src: url("/fonts/Switzer-VariableItalic.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
 }
 
-/* Smooth theme transitions */
+/* Geist Mono — Vercel. Reserved for small meta-labels, timestamps, and code. */
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/fonts/GeistMono-Variable.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/fonts/GeistMono-VariableItalic.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Gambetta — Indian Type Foundry. Editorial serif, reserved for rare emphasis. */
+@font-face {
+  font-family: "Gambetta";
+  src: url("/fonts/Gambetta-Variable.woff2") format("woff2-variations");
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gambetta";
+  src: url("/fonts/Gambetta-VariableItalic.woff2") format("woff2-variations");
+  font-weight: 300 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@theme {
+  --font-sans: "Switzer", ui-sans-serif, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-serif: "Gambetta", ui-serif, Georgia, "Times New Roman", serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --text-meta: 0.75rem;
+  --text-caption: 0.875rem;
+  --text-body: 1rem;
+  --text-body-lg: 1.125rem;
+  --text-h3: clamp(1.25rem, 1.5vw + 1rem, 1.75rem);
+  --text-h2: clamp(1.75rem, 3vw + 1rem, 3rem);
+  --text-h1: clamp(2.75rem, 7vw + 1rem, 5.5rem);
+  --text-display: clamp(5rem, 18vw, 14rem);
+
+  --tracking-display: -0.03em;
+  --tracking-heading: -0.015em;
+  --tracking-meta: 0.08em;
+}
+
+html {
+  font-family: var(--font-sans);
+  font-feature-settings: "kern", "ss01";
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
   transition: background-color 0.3s ease, color 0.3s ease;
+  line-height: 1.65;
 }
 
-/* Clean link styling */
 a {
   text-decoration-thickness: 1px;
   text-underline-offset: 2px;
   transition: color 0.2s ease;
+}
+
+.font-mono,
+code,
+kbd,
+samp,
+pre {
+  font-family: var(--font-mono);
+}
+
+.font-serif {
+  font-family: var(--font-serif);
 }
