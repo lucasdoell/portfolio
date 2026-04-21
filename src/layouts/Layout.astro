@@ -7,9 +7,17 @@ import "../styles/global.css";
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+
+    <meta name="description" content="Lucas Doell — software engineer working in the space between code, product, and craft. Based in Ithaca, New York." />
+    <meta name="theme-color" content="#f4efe6" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#21201e" media="(prefers-color-scheme: dark)" />
+
+    <meta property="og:title" content="Lucas Doell" />
+    <meta property="og:description" content="Software engineer, writing and building in the space between code and craft." />
+    <meta property="og:type" content="website" />
 
     <link
       rel="preload"
@@ -25,13 +33,41 @@ import "../styles/global.css";
       type="font/woff2"
       crossorigin
     />
+    <link
+      rel="preload"
+      href="/fonts/GeistMono-Variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
 
-    <title>Lucas Doell | Software Engineer, CS @ Cornell</title>
+    {/* Set theme before paint to avoid flash */}
+    <script is:inline>
+      (function () {
+        try {
+          const stored = localStorage.getItem("ld:theme");
+          const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          const mode = stored || (prefersDark ? "dark" : "light");
+          document.documentElement.setAttribute("data-theme", mode);
+        } catch (e) {
+          // If localStorage blocked, fall back to system preference via CSS.
+        }
+      })();
+    </script>
+
+    <title>Lucas Doell — Software engineer, Ithaca NY</title>
   </head>
-  <body class="bg-white dark:bg-gray-950 text-gray-950 dark:text-gray-50">
-    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-gray-950 focus:text-gray-50 dark:focus:bg-gray-50 dark:focus:text-gray-950">Skip to content</a>
+  <body>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 meta"
+      style="background: var(--color-fg); color: var(--color-ground);"
+    >
+      Skip to content
+    </a>
+    <div class="grain" aria-hidden="true"></div>
     <Nav />
-    <main id="main" class="w-full">
+    <main id="main" class="relative w-full">
       <slot />
     </main>
   </body>

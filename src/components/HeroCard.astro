@@ -2,65 +2,194 @@
 interface Props {
   class?: string;
 }
-
 const { class: className } = Astro.props;
+
+const now = new Date();
+const yearLabel = now.getFullYear();
 ---
 
 <section
-  class:list={["w-full max-w-5xl mx-auto px-8 xl:px-0 py-24", className]}
+  class:list={[
+    "relative w-full overflow-hidden",
+    "min-h-[100svh]",
+    "px-6 sm:px-10 lg:px-14",
+    "pt-[6.5rem] sm:pt-28",
+    "pb-10",
+    className,
+  ]}
+  aria-labelledby="hero-name"
 >
-  <div class="flex flex-col md:flex-row gap-12 items-start">
-    <div class="flex-1">
-      <h1 class="text-5xl font-bold mb-6 leading-tight">
-        <span class="text-gray-950 dark:text-gray-50">
-          Full-stack engineer building scalable, data-driven applications.
-        </span>
-      </h1>
+  <div
+    class="absolute top-[6.25rem] sm:top-[7rem] right-6 sm:right-10 lg:right-14 text-right reveal reveal-2"
+    style="z-index: 5;"
+  >
+    <div class="meta mb-1" id="local-clock">EWG · --:--:--</div>
+    <div class="meta" style="color: var(--color-fg);">N 40.28° · W 74.78°</div>
+  </div>
 
-      <p class="text-gray-600 dark:text-gray-400 text-lg mb-4 leading-relaxed">
-        I lead a development team at the <span
-          class="text-gray-950 dark:text-gray-50"
-          >New Jersey Department of Community Affairs</span
-        >, building tools that enhance accessibility and user experience—from
-        internationalized eviction guides to AI-powered assistants.
-      </p>
-
-      <p class="text-gray-600 dark:text-gray-400 text-lg mb-4 leading-relaxed">
-        As founder of <span class="text-gray-950 dark:text-gray-50"
-          >lux.dev LLC</span
-        >, I've built open-source platforms like Parsertime that serve gaming
-        communities and provide detailed analytics for players and coaches.
-      </p>
-
-      <p class="text-gray-600 dark:text-gray-400 text-lg mb-8 leading-relaxed">
-        I'm pursuing a B.A. in Computer Science with a minor in AI at <span
-          class="text-gray-950 dark:text-gray-50">Cornell University</span
-        >.
-      </p>
-
-      <div class="flex flex-row gap-4">
-        <a
-          href="#work"
-          class="inline-flex items-center justify-center px-6 py-3 min-h-[44px] border border-gray-950 dark:border-gray-50 text-gray-950 dark:text-gray-50 text-base font-medium hover:bg-gray-950 hover:text-gray-50 dark:hover:bg-gray-50 dark:hover:text-gray-950 transition-colors"
-        >
-          View My Work
-        </a>
-
-        <a
-          href="mailto:lucas@lux.dev"
-          class="inline-flex items-center justify-center px-6 py-3 min-h-[44px] border border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-400 text-base hover:border-gray-950 hover:text-gray-950 dark:hover:border-gray-50 dark:hover:text-gray-50 transition-colors"
-        >
-          Get in Touch
-        </a>
-      </div>
+  <div
+    class="absolute top-[6.25rem] sm:top-[7rem] left-6 sm:left-10 lg:left-14 reveal reveal-1"
+    style="z-index: 5;"
+  >
+    <div class="meta mb-1">Index &mdash; {yearLabel}</div>
+    <div class="meta" style="color: var(--color-fg);">
+      Software Engineer
     </div>
+  </div>
 
-    <div class="w-64 h-64 flex-shrink-0">
-      <img
-        src="/portrait.jpg"
-        alt="Lucas Doell"
-        class="w-full h-full object-cover rounded-lg"
-      />
+  <div
+    class="absolute left-6 sm:left-10 lg:left-14 right-6 sm:right-10 lg:right-14"
+    style="bottom: clamp(5.5rem, 10vh, 9rem); z-index: 2;"
+  >
+    <h1
+      id="hero-name"
+      class="display reveal reveal-3"
+      style="font-size: var(--text-display); font-weight: 480;"
+    >
+      <span class="block" style="color: var(--color-fg);">Lucas</span>
+      <span
+        class="block"
+        style="color: var(--color-fg); margin-top: -0.08em;"
+      >
+        <span class="serif-italic" style="letter-spacing: -0.035em;">Doell</span
+        ><span
+          aria-hidden="true"
+          style="display: inline-block; width: 0.18em; height: 0.18em; background: var(--color-accent); border-radius: 999px; vertical-align: 0.12em; margin-left: 0.1em;"
+        ></span>
+      </span>
+    </h1>
+  </div>
+
+  <div class="hero-portrait reveal reveal-4">
+    <img
+      src="/portrait.jpg"
+      alt="Lucas Doell, photographed"
+      loading="eager"
+      class="w-full h-full object-cover"
+      style="
+        filter: grayscale(0.1) contrast(1.02);
+        border: 1px solid var(--color-rule);
+      "
+    />
+    <div class="meta mt-2" style="text-align: right;">
+      Fig. 01 &mdash; L.D., {yearLabel}
+    </div>
+  </div>
+
+  <div class="hero-lede reveal reveal-5">
+    <p class="hero-lede__p">
+      Software engineer. I build tools for state agencies, esports communities,
+      and anyone who needs their data made legible.
+    </p>
+    <p class="meta hero-lede__role">
+      Ewing, NJ &nbsp;·&nbsp;
+      <span style="color: var(--color-fg);">LUX.DEV</span>
+      &nbsp;·&nbsp; NJ&nbsp;DCA
+    </p>
+  </div>
+
+  <div
+    class="absolute left-6 sm:left-10 lg:left-14 right-6 sm:right-10 lg:right-14 reveal reveal-6"
+    style="bottom: 1.5rem; z-index: 5;"
+  >
+    <div class="flex items-end justify-between gap-6">
+      <div class="flex items-center gap-2">
+        <span
+          aria-hidden="true"
+          class="inline-block w-1.5 h-1.5 rounded-full"
+          style="background: var(--color-accent); box-shadow: 0 0 0 3px color-mix(in oklch, var(--color-accent) 22%, transparent);"
+        ></span>
+        <span class="meta" style="color: var(--color-fg);">
+          Available for new work &mdash; {yearLabel}
+        </span>
+      </div>
+      <div class="hidden sm:flex items-center gap-3">
+        <span class="meta">Scroll</span>
+        <span
+          aria-hidden="true"
+          class="inline-block"
+          style="
+            width: 1px;
+            height: 2rem;
+            background: linear-gradient(to bottom, var(--color-fg-mute), transparent);
+          "
+        ></span>
+      </div>
     </div>
   </div>
 </section>
+
+<style>
+  .hero-portrait {
+    position: absolute;
+    top: clamp(9rem, 22vh, 17rem);
+    right: clamp(1.5rem, 11vw, 9rem);
+    width: clamp(5.5rem, 10vw, 9rem);
+    aspect-ratio: 3 / 4;
+    z-index: 3;
+  }
+
+  .hero-lede {
+    position: absolute;
+    z-index: 4;
+  }
+
+  .hero-lede__p {
+    font-size: var(--text-body-lg);
+    line-height: 1.35;
+    color: var(--color-fg-soft);
+    letter-spacing: -0.012em;
+    max-width: 34ch;
+  }
+
+  .hero-lede__role {
+    margin-top: 0.65rem;
+  }
+
+  @media (min-width: 768px) {
+    .hero-lede {
+      right: clamp(1.5rem, 4vw, 3.5rem);
+      bottom: calc(clamp(5.5rem, 10vh, 9rem) + 0.2em);
+      max-width: 32ch;
+      text-align: right;
+    }
+    .hero-lede__p {
+      margin-left: auto;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .hero-lede {
+      top: calc(clamp(9rem, 22vh, 17rem) + clamp(5.5rem, 10vw, 9rem) * (4/3) + 2.5rem);
+      right: 1.5rem;
+      text-align: right;
+      max-width: 22ch;
+    }
+    .hero-lede__p {
+      font-size: var(--text-body);
+      margin-left: auto;
+    }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    const el = document.getElementById("local-clock");
+    if (!el) return;
+    function tick() {
+      const d = new Date();
+      const fmt = new Intl.DateTimeFormat("en-US", {
+        timeZone: "America/New_York",
+        hour12: false,
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      }).formatToParts(d);
+      const parts = {};
+      for (const p of fmt) parts[p.type] = p.value;
+      el.textContent = `EWG · ${parts.hour}:${parts.minute}:${parts.second}`;
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+</script>
