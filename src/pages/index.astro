@@ -1,14 +1,16 @@
 ---
-import Footer from "@/components/Footer.astro";
-import HeroCard from "@/components/HeroCard.astro";
-import Record from "@/components/Record.astro";
-import SelectedWork from "@/components/SelectedWork.astro";
-import Layout from "@/layouts/Layout.astro";
+import Contact from "../components/Contact.astro";
+import Hero from "../components/Hero.astro";
+import Logbook from "../components/Logbook.astro";
+import PolarisBanner from "../components/PolarisBanner.astro";
+import WritingTeaser from "../components/WritingTeaser.astro";
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-  <HeroCard />
-  <SelectedWork />
-  <Record />
-  <Footer />
+  <Hero slot="top" />
+  <PolarisBanner />
+  <Logbook />
+  <WritingTeaser />
+  <Contact />
 </Layout>

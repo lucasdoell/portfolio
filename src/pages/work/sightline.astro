@@ -1,0 +1,79 @@
+---
+import CaseCover from "../../components/case/CaseCover.astro";
+import CaseMeta from "../../components/case/CaseMeta.astro";
+import Decisions from "../../components/case/Decisions.astro";
+import Overview from "../../components/case/Overview.astro";
+import Stats from "../../components/case/Stats.astro";
+import { links } from "../../data/links";
+import CaseStudy from "../../layouts/CaseStudy.astro";
+
+const decisions = [
+  {
+    tag: "Parsing",
+    decision: "Logs are parsed in the browser, not on the server.",
+    body: "A scrim produces one log file per map. Parsertime reads them on the coach's machine, then uploads the parsed, gzipped result. Heavy parsing never ties up a server, and big nights stay under the upload limit.",
+  },
+  {
+    tag: "Prediction",
+    decision: "Train in Python, predict in TypeScript.",
+    body: "Win probability comes from a LightGBM model per game mode, trained on thousands of real scrim maps. The site walks the exported trees in plain TypeScript, with no machine-learning runtime at request time. A shared test fixture keeps both sides in agreement to six decimal places.",
+  },
+  {
+    tag: "Models",
+    decision: "A new model ships only if it beats the one in production.",
+    body: "Each mode has to stay calibrated and beat the current model on held-out maps, or it doesn't ship. Maps are split whole, never by snapshot, because moments inside one map look too much alike and would flatter the score.",
+  },
+  {
+    tag: "Open core",
+    decision: "Parsertime stays open. Sightline builds on top of it.",
+    body: "The stats engine is MIT-licensed and anyone can run it or send a fix. Sightline pulls that core in as its upstream and adds the paid coaching tools for organisations running several rosters.",
+  },
+];
+---
+
+<CaseStudy
+  title="Parsertime & Sightline"
+  description="Parsertime turns Overwatch scrim logs into stats for esports teams. Sightline builds coaching tools on top."
+  next={{ index: "03", title: "ChatDCA", href: "/work/chatdca" }}
+>
+  <CaseCover index="02" title="Parsertime & Sightline" tagline="Scrim stats for Overwatch teams." />
+
+  <CaseMeta
+    items={[
+      { label: "Role", value: "Founder, design and code" },
+      { label: "Timeline", value: "November 2023 — now" },
+      { label: "Stack", value: "Next.js, TypeScript, Postgres, Python" },
+      { label: "License", value: "MIT (Parsertime)" },
+    ]}
+    links={[
+      { label: "parsertime.app ↗", href: links.parsertime },
+      { label: "GitHub ↗", href: links.parsertimeRepo },
+    ]}
+  />
+
+  <Overview lead="Overwatch teams scrim most nights and remember almost none of it. Parsertime keeps the numbers.">
+    <p>
+      A team hosts its scrim with a workshop code that logs every fight. After the match, the coach drops the log files
+      into Parsertime and gets the night back as stats: per-map overviews, player tables, first deaths, ultimate value,
+      map comparisons and a live estimate of who was winning each fight.
+    </p>
+    <p>
+      I started it in late 2023 as a side project for one team. It now tracks more than 2,000 players on 430 teams.
+      Sightline is the next step, built on the same open core: coaching tools for organisations that run several
+      rosters, now in private beta.
+    </p>
+  </Overview>
+
+  <Decisions title="Four decisions" note="What kept a side project fast and honest" items={decisions} />
+
+  <Stats
+    title="By the numbers"
+    note="Since November 2023"
+    intro="Built and run by one person, with every release going out through the open-source repo first."
+    stats={[
+      { value: "2,000+", label: "Players" },
+      { value: "430", label: "Teams" },
+      { value: "21M+", label: "Stats tracked", accent: true },
+    ]}
+  />
+</CaseStudy>

@@ -24,13 +24,6 @@
   font-style: normal;
   font-display: swap;
 }
-@font-face {
-  font-family: "Geist Mono";
-  src: url("/fonts/GeistMono-VariableItalic.woff2") format("woff2-variations");
-  font-weight: 100 900;
-  font-style: italic;
-  font-display: swap;
-}
 
 /* Gambetta — Indian Type Foundry */
 @font-face {
@@ -49,126 +42,94 @@
 }
 
 @theme {
-  --font-sans: "Switzer", ui-sans-serif, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-sans: "Switzer", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   --font-serif: "Gambetta", ui-serif, Georgia, "Times New Roman", serif;
   --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
-  /* Type scale — fixed body, fluid only at display sizes */
-  --text-meta: 0.6875rem;    /* 11px — mono labels */
-  --text-caption: 0.8125rem; /* 13px — secondary meta */
-  --text-body: 1.0625rem;    /* 17px — body copy */
-  --text-body-lg: 1.1875rem; /* 19px — lede paragraphs */
-  --text-rule: 1.375rem;     /* 22px — ledger entries */
-  --text-h3: clamp(1.375rem, 0.5vw + 1.25rem, 1.75rem);
-  --text-h2: clamp(2rem, 2vw + 1.25rem, 3.25rem);
-  --text-h1: clamp(2.75rem, 5vw + 1rem, 5.5rem);
-  --text-display: clamp(4.25rem, 19vw, 18rem);
-  --text-display-sm: clamp(3rem, 11vw, 8rem);
+  /* Day: cream paper, warm ink, one Prussian blue. */
+  --color-paper: #f4f1e9;
+  --color-ink: #1f1d1a;
+  --color-graphite: #5e5a53;
+  --color-rule: #dad5c9;
+  --color-prussian: #1e3f8c;
 
-  --tracking-display: -0.045em;
-  --tracking-heading: -0.02em;
-  --tracking-body: -0.005em;
-  --tracking-meta: 0.12em;
-
-  --leading-display: 0.85;
-  --leading-heading: 1.05;
-  --leading-body: 1.55;
-
-  /* Palette (OKLCH, warm-tinted neutrals) */
-  --color-bone: oklch(0.962 0.009 82);
-  --color-bone-soft: oklch(0.942 0.012 82);
-  --color-bone-line: oklch(0.88 0.015 82);
-  --color-ink: oklch(0.205 0.012 62);
-  --color-ink-soft: oklch(0.42 0.012 62);
-  --color-ink-mute: oklch(0.58 0.012 68);
-
-  --color-char: oklch(0.162 0.006 62);
-  --color-char-soft: oklch(0.205 0.008 62);
-  --color-char-line: oklch(0.30 0.009 65);
-  --color-cream: oklch(0.935 0.014 82);
-  --color-cream-soft: oklch(0.80 0.014 80);
-  --color-cream-mute: oklch(0.63 0.013 75);
-
-  /* Accent — muted vermillion */
-  --color-accent: oklch(0.63 0.142 38);
-  --color-accent-soft: oklch(0.70 0.115 40);
-
-  /* Semantic tokens */
-  --color-ground: var(--color-bone);
-  --color-ground-soft: var(--color-bone-soft);
-  --color-rule: var(--color-bone-line);
-  --color-fg: var(--color-ink);
-  --color-fg-soft: var(--color-ink-soft);
-  --color-fg-mute: var(--color-ink-mute);
-
-  /* Spacing (4pt grid) */
-  --space-2xs: 0.25rem;
-  --space-xs: 0.5rem;
-  --space-sm: 0.75rem;
-  --space-md: 1rem;
-  --space-lg: 1.5rem;
-  --space-xl: 2rem;
-  --space-2xl: 3rem;
-  --space-3xl: 4rem;
-  --space-4xl: 6rem;
-  --space-5xl: 8rem;
-  --space-6xl: 12rem;
+  /* Night: the Polaris sky. */
+  --color-night: #111318;
+  --color-frost: #e9e7e1;
+  --color-dusk: #8e9099;
+  --color-night-rule: #262932;
+  --color-starlight: #bcd3ff;
 }
 
-/* Dark theme: explicit [data-theme="dark"] wins; otherwise system preference
-   applies via the media query below (only if no [data-theme] is set). */
+/* Semantic roles. Components only use these. */
+:root {
+  --bg: var(--color-paper);
+  --fg: var(--color-ink);
+  --muted: var(--color-graphite);
+  --line: var(--color-rule);
+  --line-strong: var(--color-ink);
+  --accent: var(--color-prussian);
+  --plate: var(--color-night);
+  --plate-line: #2a2d35;
+  --banner-meta: #4a4f5c;
+
+  --gutter: clamp(20px, 4.45vw, 64px);
+  --page: 1440px;
+  --label-col: minmax(0, 420px);
+  --col-gap: clamp(32px, 4.45vw, 64px);
+
+  color-scheme: light;
+}
+
 :root[data-theme="dark"] {
-  --color-ground: var(--color-char);
-  --color-ground-soft: var(--color-char-soft);
-  --color-rule: var(--color-char-line);
-  --color-fg: var(--color-cream);
-  --color-fg-soft: var(--color-cream-soft);
-  --color-fg-mute: var(--color-cream-mute);
-  --color-accent: oklch(0.72 0.135 42);
-  --color-accent-soft: oklch(0.78 0.105 44);
+  --bg: var(--color-night);
+  --fg: var(--color-frost);
+  --muted: var(--color-dusk);
+  --line: var(--color-night-rule);
+  --line-strong: var(--color-frost);
+  --accent: var(--color-starlight);
+  --plate: #0c0e12;
+  --plate-line: #262932;
+  --banner-meta: #a9b3c9;
+  color-scheme: dark;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
-    --color-ground: var(--color-char);
-    --color-ground-soft: var(--color-char-soft);
-    --color-rule: var(--color-char-line);
-    --color-fg: var(--color-cream);
-    --color-fg-soft: var(--color-cream-soft);
-    --color-fg-mute: var(--color-cream-mute);
-    --color-accent: oklch(0.72 0.135 42);
-    --color-accent-soft: oklch(0.78 0.105 44);
+    --bg: var(--color-night);
+    --fg: var(--color-frost);
+    --muted: var(--color-dusk);
+    --line: var(--color-night-rule);
+    --line-strong: var(--color-frost);
+    --accent: var(--color-starlight);
+    --plate: #0c0e12;
+    --plate-line: #262932;
+    --banner-meta: #a9b3c9;
+    color-scheme: dark;
   }
 }
 
 html {
   font-family: var(--font-sans);
-  font-feature-settings: "kern", "ss01", "ss02", "cv11";
-  font-kerning: normal;
-  text-rendering: optimizeLegibility;
+  font-synthesis: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--color-ground);
-  color: var(--color-fg);
+  text-rendering: optimizeLegibility;
+  background-color: var(--bg);
+  color: var(--fg);
 }
 
 body {
-  background-color: var(--color-ground);
-  color: var(--color-fg);
-  font-size: var(--text-body);
-  line-height: var(--leading-body);
-  letter-spacing: var(--tracking-body);
-  transition: background-color 360ms ease, color 360ms ease;
-  background-image:
-    radial-gradient(circle at 20% 0%, color-mix(in oklch, var(--color-fg) 2%, transparent) 0, transparent 45%),
-    radial-gradient(circle at 100% 100%, color-mix(in oklch, var(--color-fg) 1.5%, transparent) 0, transparent 55%);
-  background-attachment: fixed;
+  background-color: var(--bg);
+  color: var(--fg);
+  font-size: 17px;
+  line-height: 28px;
+  overflow-x: clip;
 }
 
 ::selection {
-  background: var(--color-accent);
-  color: var(--color-ground);
+  background: var(--accent);
+  color: var(--bg);
 }
 
 a {
@@ -176,126 +137,103 @@ a {
   text-decoration: none;
 }
 
-.font-mono {
-  font-family: var(--font-mono);
-  font-feature-settings: "ss01", "ss02", "ss03", "cv11", "tnum";
+:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 4px;
 }
 
-.font-serif {
-  font-family: var(--font-serif);
+/* Page column. Full-bleed pieces (sky, banners, plates) live outside it. */
+.wrap {
+  width: 100%;
+  max-width: var(--page);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
 }
 
+/* Type roles from the brief. */
 .meta {
   font-family: var(--font-mono);
-  font-size: var(--text-meta);
-  letter-spacing: var(--tracking-meta);
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-fg-mute);
-  font-weight: 400;
+}
+.meta--muted {
+  color: var(--muted);
+}
+.meta--accent {
+  color: var(--accent);
 }
 
-.meta-fg {
-  color: var(--color-fg);
-}
-
-.ink-link {
-  position: relative;
-  color: var(--color-fg);
-  transition: color 240ms ease;
-}
-.ink-link::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -0.1em;
-  height: 1px;
-  background: currentColor;
-  transform-origin: left center;
-  transform: scaleX(0);
-  transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-.ink-link:hover::after,
-.ink-link:focus-visible::after {
-  transform: scaleX(1);
-}
-
-:focus-visible {
-  outline: 1.5px solid var(--color-accent);
-  outline-offset: 3px;
-  border-radius: 1px;
-}
-
-.display {
-  font-family: var(--font-sans);
-  font-weight: 500;
-  letter-spacing: var(--tracking-display);
-  line-height: var(--leading-display);
-  font-feature-settings: "ss01", "ss02", "cv11";
-}
-
-.serif-italic {
+.decision {
   font-family: var(--font-serif);
   font-style: italic;
-  font-weight: 400;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  font-size: clamp(30px, 2.8vw, 40px);
+  line-height: 1.2;
+  text-wrap: pretty;
 }
 
-.rule {
-  height: 1px;
-  width: 100%;
-  background: var(--color-rule);
-  border: none;
-  margin: 0;
+.section-title {
+  font-weight: 500;
+  font-size: clamp(40px, 3.9vw, 56px);
+  line-height: 1;
+  letter-spacing: -0.035em;
 }
 
-.dot-accent {
-  display: inline-block;
-  width: 0.5em;
-  height: 0.5em;
-  background: var(--color-accent);
-  border-radius: 999px;
-  vertical-align: 0.15em;
+.body-copy {
+  font-size: 17px;
+  line-height: 28px;
+  max-width: 640px;
+  text-wrap: pretty;
 }
 
-.reveal {
-  opacity: 0;
-  transform: translateY(8px);
-  animation: reveal 820ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-.reveal-1 { animation-delay: 40ms; }
-.reveal-2 { animation-delay: 140ms; }
-.reveal-3 { animation-delay: 240ms; }
-.reveal-4 { animation-delay: 340ms; }
-.reveal-5 { animation-delay: 440ms; }
-.reveal-6 { animation-delay: 540ms; }
-
-@keyframes reveal {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Links in mono labels get a quiet underline on hover. */
+a.meta:hover,
+a .meta:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-  .reveal { opacity: 1; transform: none; }
+/* Theme-specific media. */
+.only-night {
+  display: none !important;
 }
-
-.grain {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0.035;
-  mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 1 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+:root[data-theme="dark"] .only-day {
+  display: none !important;
 }
-:root[data-theme="dark"] .grain { mix-blend-mode: screen; opacity: 0.05; }
+:root[data-theme="dark"] .only-night {
+  display: revert !important;
+}
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) .grain { mix-blend-mode: screen; opacity: 0.05; }
+  :root:not([data-theme]) .only-day {
+    display: none !important;
+  }
+  :root:not([data-theme]) .only-night {
+    display: revert !important;
+  }
+}
+
+.pixelated {
+  image-rendering: pixelated;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }

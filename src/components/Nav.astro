@@ -1,124 +1,127 @@
 ---
-interface Props {
-  class?: string;
-}
-const { class: className } = Astro.props;
+import Star from "./Star.astro";
+
+const path = Astro.url.pathname;
+const links = [
+  { href: "/#work", label: "Work" },
+  { href: "/writing", label: "Writing", current: path.startsWith("/writing") },
+  { href: "/#contact", label: "Contact" },
+];
 ---
 
-<header
-  class:list={[
-    "fixed top-0 left-0 right-0 z-40",
-    "px-6 sm:px-10 lg:px-14",
-    "pt-6 pb-4",
-    "pointer-events-none",
-    className,
-  ]}
-  style="background: linear-gradient(to bottom, var(--color-ground) 55%, transparent 100%);"
->
-  <div class="flex items-start justify-between pointer-events-auto">
-    <a
-      href="/"
-      class="flex items-baseline gap-3 group"
-      aria-label="Lucas Doell — home"
-    >
-      <span
-        class="meta meta-fg font-medium"
-        style="letter-spacing: 0.22em;"
-        aria-hidden="true"
-      >
-        LD
-      </span>
-      <span
-        class="meta"
-        aria-hidden="true"
-      >
-        &mdash; Lucas Doell
-      </span>
-    </a>
-
-    <div class="flex items-center gap-5 sm:gap-7">
-      <nav
-        aria-label="Primary"
-        class="hidden sm:flex items-center gap-6"
-      >
-        <a href="#work" class="meta ink-link">
-          <span class="meta" style="color: var(--color-fg-mute);">01</span>
-          <span class="ml-1.5" style="color: var(--color-fg);">Work</span>
+<header class="nav wrap">
+  <a href="/" class="nav__home meta" aria-label="Lucas Doell, home">
+    <Star />
+    <span>Lucas Doell</span>
+  </a>
+  <nav class="nav__links" aria-label="Primary">
+    {
+      links.map((l) => (
+        <a href={l.href} class="meta" aria-current={l.current ? "page" : undefined}>
+          {l.label}
         </a>
-        <a href="#experience" class="meta ink-link">
-          <span class="meta" style="color: var(--color-fg-mute);">02</span>
-          <span class="ml-1.5" style="color: var(--color-fg);">Record</span>
-        </a>
-        <a href="#contact" class="meta ink-link">
-          <span class="meta" style="color: var(--color-fg-mute);">03</span>
-          <span class="ml-1.5" style="color: var(--color-fg);">Contact</span>
-        </a>
-      </nav>
-      <button
-        id="theme-toggle"
-        type="button"
-        aria-label="Toggle theme"
-        class="meta relative inline-flex items-center gap-2 cursor-pointer"
-      >
-        <span class="meta" aria-hidden="true">
-          <span data-theme-label="light">Day</span><span data-theme-label="dark" class="hidden">Night</span>
-        </span>
-        <span
-          aria-hidden="true"
-          class="inline-block w-2 h-2 rounded-full border"
-          style="border-color: var(--color-fg-mute);"
-          data-theme-dot
-        ></span>
-      </button>
-    </div>
+      ))
+    }
+  </nav>
+  <div class="nav__end">
+    <button type="button" class="theme-toggle meta" data-theme-toggle aria-label="Switch between day and night">
+      <span class="theme-toggle__day">Day</span>
+      <span aria-hidden="true">/</span>
+      <span class="theme-toggle__night">Night</span>
+    </button>
   </div>
 </header>
 
-<script is:inline>
-  (function () {
-    const STORAGE_KEY = "ld:theme";
-    const root = document.documentElement;
+<style>
+  .nav {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+  }
+  .nav::after {
+    content: "";
+    position: absolute;
+    left: var(--gutter);
+    right: var(--gutter);
+    bottom: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .nav__home,
+  .nav__end {
+    width: 320px;
+    flex-shrink: 0;
+  }
+  .nav__home {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .nav__links {
+    display: flex;
+    gap: 36px;
+  }
+  .nav__links a[aria-current="page"] {
+    color: var(--accent);
+  }
+  .nav__end {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .theme-toggle {
+    display: inline-flex;
+    gap: 0.5em;
+    color: var(--muted);
+    cursor: pointer;
+    background: none;
+    border: 0;
+    padding: 8px 0;
+  }
+  .theme-toggle__day {
+    color: var(--fg);
+  }
+  :global(:root[data-theme="dark"]) .theme-toggle__day {
+    color: var(--muted);
+  }
+  :global(:root[data-theme="dark"]) .theme-toggle__night {
+    color: var(--fg);
+  }
 
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
-
-    function resolve(mode) {
-      if (mode === "dark" || mode === "light") return mode;
-      return prefersDark.matches ? "dark" : "light";
+  @media (max-width: 900px) {
+    .nav__home,
+    .nav__end {
+      width: auto;
     }
-
-    function apply(mode) {
-      const resolved = resolve(mode);
-      root.setAttribute("data-theme", resolved);
-      const lightLabel = document.querySelector('[data-theme-label="light"]');
-      const darkLabel = document.querySelector('[data-theme-label="dark"]');
-      if (lightLabel && darkLabel) {
-        lightLabel.classList.toggle("hidden", resolved === "dark");
-        darkLabel.classList.toggle("hidden", resolved === "light");
-      }
-      const dot = document.querySelector("[data-theme-dot]");
-      if (dot) {
-        dot.style.background =
-          resolved === "dark" ? "var(--color-cream)" : "var(--color-ink)";
-        dot.style.borderColor =
-          resolved === "dark" ? "var(--color-cream)" : "var(--color-ink)";
-      }
+    .nav__links {
+      gap: 20px;
     }
-
-    const stored = localStorage.getItem(STORAGE_KEY);
-    apply(stored || (prefersDark.matches ? "dark" : "light"));
-
-    const btn = document.getElementById("theme-toggle");
-    if (btn) {
-      btn.addEventListener("click", () => {
-        const next =
-          root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-        localStorage.setItem(STORAGE_KEY, next);
-        apply(next);
-      });
+  }
+  @media (max-width: 640px) {
+    .nav__links {
+      display: none;
     }
+    .nav {
+      height: 64px;
+    }
+  }
+</style>
 
-    prefersDark.addEventListener("change", (e) => {
-      if (!localStorage.getItem(STORAGE_KEY)) apply(e.matches ? "dark" : "light");
+<script>
+  // Mirrors the pre-paint script in Layout: stored choice wins, otherwise the system setting.
+  const root = document.documentElement;
+  const toggles = document.querySelectorAll<HTMLButtonElement>("[data-theme-toggle]");
+  const current = () =>
+    root.dataset.theme ?? (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  for (const btn of toggles) {
+    btn.addEventListener("click", () => {
+      const next = current() === "dark" ? "light" : "dark";
+      root.dataset.theme = next;
+      try {
+        localStorage.setItem("ld:theme", next);
+      } catch {}
+      document.dispatchEvent(new CustomEvent("themechange", { detail: next }));
     });
-  })();
+  }
 </script>

@@ -1,0 +1,60 @@
+---
+import CaseCover from "../../components/case/CaseCover.astro";
+import CaseMeta from "../../components/case/CaseMeta.astro";
+import Decisions from "../../components/case/Decisions.astro";
+import Overview from "../../components/case/Overview.astro";
+import { links } from "../../data/links";
+import CaseStudy from "../../layouts/CaseStudy.astro";
+
+const decisions = [
+  {
+    tag: "Framework",
+    decision: "Build on a framework, and fix it upstream when it breaks.",
+    body: "ChatDCA runs on eve, Vercel's agent framework. When something in eve didn't hold up for us, the fix went back to eve as a pull request instead of living in a private patch.",
+  },
+  {
+    tag: "Models",
+    decision: "Every model call goes through AWS Bedrock.",
+    body: "The agents reach their models through Bedrock, so the whole system stays with one cloud provider the department already uses.",
+  },
+  {
+    tag: "Code",
+    decision: "Code an agent writes runs in a sandbox, never next to the app.",
+    body: "When the data agent writes code to answer a question, that code runs in an isolated sandbox, so a bad script can only break itself.",
+  },
+];
+---
+
+<CaseStudy
+  title="ChatDCA"
+  description="An AI assistant for New Jersey Department of Community Affairs staff, built on eve and AWS Bedrock."
+  next={{ index: "01", title: "Polaris", href: "/work/polaris" }}
+>
+  <CaseCover index="03" title="ChatDCA" tagline="An AI assistant for New Jersey state staff." />
+
+  <CaseMeta
+    items={[
+      { label: "Role", value: "Team lead (engineer from Sep 2025)" },
+      { label: "Timeline", value: "September 2025 — now" },
+      { label: "Built on", value: "eve, AWS Bedrock" },
+      { label: "For", value: "NJ Department of Community Affairs" },
+    ]}
+    links={[
+      { label: "eve #1452 ↗", href: links.eve1452 },
+      { label: "eve #1453 ↗", href: links.eve1453 },
+    ]}
+  />
+
+  <Overview lead="State staff ask one assistant. It hands the work to the right specialist.">
+    <p>
+      ChatDCA is a team of five agents. A front-door assistant takes the question and passes it to a specialist for
+      data analysis, forms or writing. Staff see one conversation either way.
+    </p>
+    <p>
+      This page is short on purpose. It's government work, so most of the details stay with the team. What I can share
+      is how it's put together.
+    </p>
+  </Overview>
+
+  <Decisions title="Three decisions" note="At a high level" items={decisions} />
+</CaseStudy>

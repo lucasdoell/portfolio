@@ -1,6 +1,20 @@
 ---
-import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import Lightbox from "../components/Lightbox.astro";
 import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = "Lucas Doell",
+  description = "Lucas Doell is a software engineer in Ewing, New Jersey. He builds AI agents for New Jersey state government, stats tools for esports teams, and Polaris, an open-source home for coding agents.",
+  image = "/brand/banner-night.png",
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
@@ -9,66 +23,59 @@ import "../styles/global.css";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" type="application/rss+xml" title="Lucas Doell — Writing" href="/rss.xml" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f4f1e9" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#111318" media="(prefers-color-scheme: dark)" />
 
-    <meta name="description" content="Lucas Doell — software engineer working in the space between code, product, and craft. Based in Ithaca, New York." />
-    <meta name="theme-color" content="#f4efe6" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#21201e" media="(prefers-color-scheme: dark)" />
-
-    <meta property="og:title" content="Lucas Doell" />
-    <meta property="og:description" content="Software engineer, writing and building in the space between code and craft." />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta name="twitter:card" content="summary_large_image" />
 
-    <link
-      rel="preload"
-      href="/fonts/Switzer-Variable.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="/fonts/Gambetta-VariableItalic.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="/fonts/GeistMono-Variable.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
+    <link rel="preload" href="/fonts/Switzer-Variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Gambetta-VariableItalic.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/GeistMono-Variable.woff2" as="font" type="font/woff2" crossorigin />
 
-    {/* Set theme before paint to avoid flash */}
+    {/* Set the theme before paint so night visitors never see a cream flash. */}
     <script is:inline>
       (function () {
         try {
-          const stored = localStorage.getItem("ld:theme");
-          const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-          const mode = stored || (prefersDark ? "dark" : "light");
-          document.documentElement.setAttribute("data-theme", mode);
-        } catch (e) {
-          // If localStorage blocked, fall back to system preference via CSS.
-        }
+          var stored = localStorage.getItem("ld:theme");
+          var dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          document.documentElement.setAttribute("data-theme", stored || (dark ? "dark" : "light"));
+        } catch (e) {}
       })();
     </script>
 
-    <title>Lucas Doell — Software engineer, Ithaca NY</title>
+    <title>{title}</title>
   </head>
   <body>
-    <a
-      href="#main"
-      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 meta"
-      style="background: var(--color-fg); color: var(--color-ground);"
-    >
-      Skip to content
-    </a>
-    <div class="grain" aria-hidden="true"></div>
-    <Nav />
-    <main id="main" class="relative w-full">
+    <a href="#main" class="skip meta">Skip to content</a>
+    <slot name="top" />
+    <main id="main">
       <slot />
     </main>
+    <Footer />
+    <Lightbox />
   </body>
 </html>
+
+<style>
+  .skip {
+    position: absolute;
+    left: -9999px;
+    top: 16px;
+    z-index: 50;
+    padding: 8px 12px;
+    background: var(--fg);
+    color: var(--bg);
+  }
+  .skip:focus {
+    left: 16px;
+  }
+</style>

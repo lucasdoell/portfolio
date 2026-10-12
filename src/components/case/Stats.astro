@@ -1,0 +1,93 @@
+---
+interface Props {
+  title: string;
+  note: string;
+  intro: string;
+  stats: { value: string; label: string; accent?: boolean }[];
+}
+const { title, note, intro, stats } = Astro.props;
+---
+
+<section class="stats wrap">
+  <header class="stats__head">
+    <h2 class="section-title">{title}</h2>
+    <span class="meta meta--muted">{note}</span>
+  </header>
+  <div class="stats__grid">
+    <p class="body-copy stats__intro">{intro}</p>
+    <div class="stats__row">
+      {
+        stats.map((s) => (
+          <div class="stat">
+            <span class:list={["stat__value", { "stat__value--accent": s.accent }]}>{s.value}</span>
+            <span class="meta meta--muted">{s.label}</span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .stats {
+    padding-top: 144px;
+  }
+  .stats__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--line-strong);
+  }
+  .section-title {
+    margin: 0;
+  }
+  .stats__grid {
+    display: grid;
+    grid-template-columns: var(--label-col) minmax(0, 1fr);
+    column-gap: var(--col-gap);
+    padding-top: 48px;
+  }
+  .stats__intro {
+    margin: 0;
+  }
+  .stats__row {
+    display: flex;
+    gap: 40px;
+  }
+  .stat {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+  .stat__value {
+    font-weight: 500;
+    font-size: clamp(48px, 5vw, 72px);
+    line-height: 1;
+    letter-spacing: -0.05em;
+  }
+  .stat__value--accent {
+    color: var(--accent);
+  }
+  @media (max-width: 900px) {
+    .stats {
+      padding-top: 96px;
+    }
+    .stats__head {
+      flex-direction: column;
+      gap: 12px;
+    }
+    .stats__grid {
+      grid-template-columns: 1fr;
+      row-gap: 40px;
+    }
+    .stats__row {
+      flex-direction: column;
+      gap: 24px;
+    }
+  }
+</style>

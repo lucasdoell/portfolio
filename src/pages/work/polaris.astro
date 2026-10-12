@@ -1,0 +1,348 @@
+---
+import CaseMeta from "../../components/case/CaseMeta.astro";
+import Decisions from "../../components/case/Decisions.astro";
+import Overview from "../../components/case/Overview.astro";
+import Stats from "../../components/case/Stats.astro";
+import Star from "../../components/Star.astro";
+import { links } from "../../data/links";
+import CaseStudy from "../../layouts/CaseStudy.astro";
+
+const decisions = [
+  {
+    tag: "Trust",
+    decision: "Polaris never installs your agents, and never touches your keys.",
+    body: "It drives the Claude Code, Codex or OpenCode you already have, signed in the way you already signed in. Nothing to migrate, nothing new to trust with a credential.",
+  },
+  {
+    tag: "Attention",
+    decision: "Only the stuck agent asks for you.",
+    body: "Agents can work for hours. Polaris keeps quiet until one needs a decision or wants to run a command, then puts it in a single inbox. Answer from the notification, or take over in the terminal and hand it back.",
+  },
+  {
+    tag: "Review",
+    decision: "The reviewer works in its own checkout, with no network.",
+    body: "Every turn and pull request gets a risk summary, with the riskiest lines first. The reviewer reads a separate copy of the code in a sandbox, so it can't touch your working tree or reach the internet.",
+  },
+  {
+    tag: "Tooling",
+    decision: "Language servers are pinned and checked, not installed on a whim.",
+    body: "The editor brings its own runtime and downloads exact releases of each language server, verified by checksum. The same project behaves the same on every machine.",
+  },
+];
+
+const gallery = [
+  { src: "/work/polaris/new-session.webp", caption: "Fig. 02 — A new session", alt: "A new Polaris session over a pixel night sky." },
+  { src: "/work/polaris/constellation.webp", caption: "Fig. 03 — Constellation", alt: "The constellation view: a lead agent and its subagents drawn as stars." },
+  { src: "/work/polaris/needs-you.webp", caption: "Fig. 04 — Needs you, light", alt: "The Needs you inbox in light mode, with one question open." },
+];
+
+const swatches = ["#1A1B1D", "#BCD3FF", "#4F82E8", "#F2C84B", "#FBFBFC"];
+---
+
+<CaseStudy
+  title="Polaris"
+  description="How Polaris, an open-source home for coding agents, was designed and built."
+  image="/brand/banner-night.png"
+  next={{ index: "02", title: "Parsertime & Sightline", href: "/work/sightline" }}
+>
+  <header class="pcover">
+    <div class="pcover__art only-day" aria-hidden="true"></div>
+    <div class="pcover__art pcover__art--night only-night" aria-hidden="true"></div>
+    <div class="pcover__inner wrap">
+      <div class="pcover__crumbs">
+        <a class="meta pcover__muted" href="/#work">← Logbook</a>
+        <span class="meta">Case study 01</span>
+      </div>
+      <h1 class="pcover__title">
+        <img class="pixelated only-day" src="/brand/wordmark-light.png" alt="Polaris" width="356" height="112" />
+        <img class="pixelated only-night" src="/brand/wordmark-dark.png" alt="Polaris" width="356" height="112" />
+      </h1>
+      <p class="pcover__tagline">The north star for your agents.</p>
+    </div>
+  </header>
+
+  <CaseMeta
+    items={[
+      { label: "Role", value: "Design, engineering, brand" },
+      { label: "Timeline", value: "September 2026 — now" },
+      { label: "Stack", value: "Electron, TypeScript, a daemon over SSH" },
+      { label: "License", value: "Apache-2.0" },
+    ]}
+    links={[{ label: "GitHub ↗", href: links.polarisRepo }]}
+  />
+
+  <Overview lead="I was running a dozen coding agents across four machines and spending my day checking on them. Polaris is the window I wanted instead.">
+    <p>
+      It runs Claude Code, Codex and OpenCode side by side, on your Mac or any machine you can reach over SSH. A small
+      daemon on each machine keeps sessions alive when you close the lid. Polaris stays quiet while agents work, and
+      asks for you only when one of them is stuck.
+    </p>
+    <p>
+      I designed it, built it, and made the brand. Most of the code was written by agents working in parallel, and
+      every wave was security-reviewed before it merged.
+    </p>
+  </Overview>
+
+  <figure class="plate">
+    <div class="plate__inner">
+      <img
+        src="/work/polaris/orchestrate.webp"
+        alt="The Orchestrate view: sessions on the left, the conversation in the middle, and the diff with a critical risk finding on the right."
+        width="2880"
+        height="1800"
+        loading="lazy"
+        data-zoom
+      />
+      <figcaption>
+        <span class="meta">Fig. 01 — Orchestrate</span>
+        <span class="meta">Sessions left, the conversation in the middle, the diff on the right</span>
+      </figcaption>
+    </div>
+  </figure>
+
+  <Decisions title="Four decisions" note="Each one written down before the code" items={decisions} />
+
+  <section class="plate plate--gallery" aria-labelledby="around-title">
+    <div class="plate__inner">
+      <header class="gallery__head">
+        <h2 id="around-title">Around the app</h2>
+        <span class="meta">Light and dark, designed together</span>
+      </header>
+      <div class="gallery">
+        {
+          gallery.map((g) => (
+            <figure>
+              <img src={g.src} alt={g.alt} width="2880" height="1800" loading="lazy" data-zoom />
+              <figcaption class="meta">{g.caption}</figcaption>
+            </figure>
+          ))
+        }
+      </div>
+      <div class="brand">
+        <Star size={72} core class="brand__star" />
+        <div class="brand__copy">
+          <span class="meta brand__label">Brand</span>
+          <p>A pixel star drawn on whole pixels, a Geist Pixel wordmark, and a night sky wherever the app is empty.</p>
+        </div>
+        <div class="brand__swatches" aria-hidden="true">
+          {swatches.map((c) => <span style={`background:${c}`} />)}
+          <span class="meta">Starlight · Needs you</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Stats
+    title="How it was built"
+    note="Decide, write it down, send the fleet"
+    intro="Each feature started as a grilling session and a written decision. Then a wave of agents built it in separate copies of the repo, and a security review closed every wave before anything merged."
+    stats={[
+      { value: "9–12", label: "Agents per wave" },
+      { value: "1", label: "Copy of the repo each" },
+      { value: "0", label: "Waves merged unreviewed", accent: true },
+    ]}
+  />
+</CaseStudy>
+
+<style>
+  .pcover {
+    position: relative;
+    height: 600px;
+    overflow: hidden;
+    background: #fce9d2;
+  }
+  :global(:root[data-theme="dark"]) .pcover {
+    background: #0b0f1e;
+  }
+  .pcover__art {
+    position: absolute;
+    inset: 0;
+    background: url("/brand/cover600-dawn.png") 67% 100% / cover no-repeat;
+    image-rendering: pixelated;
+  }
+  .pcover__art--night {
+    background-image: url("/brand/cover600-night.png");
+  }
+  :global(:root[data-theme="dark"]) .pcover__art--night {
+    display: block !important;
+  }
+  .pcover__inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding-top: 72px;
+  }
+  .pcover__crumbs {
+    display: flex;
+    gap: 24px;
+  }
+  .pcover__muted {
+    color: var(--banner-meta);
+  }
+  .pcover__title {
+    margin: 0;
+    line-height: 0;
+  }
+  .pcover__title img {
+    width: min(356px, 70vw);
+    height: auto;
+  }
+  .pcover__tagline {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(30px, 3vw, 44px);
+    line-height: 1.18;
+    letter-spacing: -0.01em;
+  }
+
+  /* Night plates: the app always sits on its own sky, whatever the page theme. */
+  .plate {
+    margin: 0;
+    background: var(--plate);
+    color: var(--color-frost);
+  }
+  .plate__inner {
+    max-width: var(--page);
+    margin-inline: auto;
+    padding: 96px clamp(20px, 8.3vw, 120px) 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .plate img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid var(--plate-line);
+    border-radius: 10px;
+  }
+  .plate figcaption {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    color: var(--color-dusk);
+  }
+
+  .plate--gallery {
+    margin-top: 144px;
+  }
+  .plate--gallery .plate__inner {
+    padding-inline: var(--gutter);
+    gap: 48px;
+  }
+  .gallery__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+  }
+  .gallery__head h2 {
+    margin: 0;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 44px;
+    letter-spacing: -0.03em;
+  }
+  .gallery__head .meta,
+  .gallery figcaption {
+    color: var(--color-dusk);
+  }
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    padding-inline: clamp(0px, 4.45vw, 64px);
+  }
+  .gallery figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .gallery img {
+    border-radius: 6px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    margin-inline: clamp(0px, 4.45vw, 64px);
+    padding-top: 32px;
+    border-top: 1px solid var(--color-night-rule);
+  }
+  .plate :global(.brand__star) {
+    color: var(--color-starlight);
+  }
+  .plate :global(.brand__star .star-core) {
+    display: inline;
+  }
+  .brand__copy {
+    width: 420px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .brand__copy p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 22px;
+    color: var(--color-dusk);
+  }
+  .brand__swatches {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+  }
+  .brand__swatches span:not(.meta) {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--plate-line);
+  }
+  .brand__swatches .meta {
+    padding-left: 12px;
+    color: var(--color-dusk);
+  }
+
+  @media (max-width: 900px) {
+    .pcover {
+      height: 480px;
+    }
+    .pcover__inner {
+      padding-top: 48px;
+    }
+    .plate__inner {
+      padding-block: 56px 48px;
+    }
+    .plate figcaption {
+      flex-direction: column;
+      gap: 6px;
+    }
+    .plate--gallery {
+      margin-top: 96px;
+    }
+    .gallery__head {
+      flex-direction: column;
+      gap: 8px;
+    }
+    .gallery {
+      grid-template-columns: 1fr;
+    }
+    .brand {
+      flex-wrap: wrap;
+    }
+    .brand__copy {
+      width: auto;
+      flex: 1 1 240px;
+    }
+    .brand__swatches {
+      flex-basis: 100%;
+      justify-content: flex-start;
+    }
+  }
+</style>

@@ -1,0 +1,71 @@
+---
+interface Props {
+  items: { label: string; value: string }[];
+  links?: { label: string; href: string }[];
+}
+const { items, links = [] } = Astro.props;
+---
+
+<div class="wrap">
+  <dl class="case-meta">
+    {
+      items.map((i) => (
+        <div class="case-meta__item">
+          <dt class="meta meta--muted">{i.label}</dt>
+          <dd>{i.value}</dd>
+        </div>
+      ))
+    }
+    {
+      links.length > 0 && (
+        <div class="case-meta__links">
+          {links.map((l) => (
+            <a class="meta meta--accent" href={l.href}>
+              {l.label}
+            </a>
+          ))}
+        </div>
+      )
+    }
+  </dl>
+</div>
+
+<style>
+  .case-meta {
+    margin: 0;
+    display: flex;
+    gap: 40px;
+    padding-block: 32px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .case-meta__item {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .case-meta__item dd {
+    margin: 0;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .case-meta__links {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+  @media (max-width: 900px) {
+    .case-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .case-meta__links {
+      align-items: flex-start;
+    }
+  }
+</style>
