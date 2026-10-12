@@ -1,0 +1,81 @@
+---
+import { formatDate, getPosts } from "../lib/posts";
+
+const posts = (await getPosts()).slice(0, 3);
+---
+
+<section class="writing wrap" aria-labelledby="writing-title">
+  <header class="writing__head">
+    <h2 id="writing-title" class="section-title">Writing</h2>
+    <a class="meta meta--accent" href="/writing">Writing page →</a>
+  </header>
+  {
+    posts.length === 0 ? (
+      <div class="writing__row">
+        <span class="meta meta--muted writing__label">Nothing yet</span>
+        <p class="writing__title">The first post is still being written.</p>
+        <a class="meta meta--accent" href="/rss.xml">Subscribe via RSS ↗</a>
+      </div>
+    ) : (
+      posts.map((p) => (
+        <a class="writing__row" href={`/writing/${p.id}`}>
+          <span class="meta meta--muted writing__label">
+            <time datetime={p.data.date.toISOString()}>{formatDate(p.data.date)}</time>
+            {p.data.topic && <> · {p.data.topic}</>}
+          </span>
+          <p class="writing__title">{p.data.title}</p>
+          <span class="meta meta--accent">Read →</span>
+        </a>
+      ))
+    )
+  }
+</section>
+
+<style>
+  .writing {
+    padding-top: 160px;
+  }
+  .writing__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--line-strong);
+  }
+  .section-title {
+    margin: 0;
+  }
+  .writing__row {
+    display: grid;
+    grid-template-columns: var(--label-col) minmax(0, 1fr) auto;
+    column-gap: var(--col-gap);
+    align-items: baseline;
+    padding-block: 32px;
+    border-bottom: 1px solid var(--line);
+  }
+  .writing__title {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(26px, 2.2vw, 32px);
+    line-height: 1.25;
+  }
+  a.writing__row:hover .writing__title {
+    color: var(--accent);
+  }
+  @media (max-width: 900px) {
+    .writing {
+      padding-top: 104px;
+    }
+    .writing__head {
+      flex-direction: column;
+      gap: 12px;
+    }
+    .writing__row {
+      grid-template-columns: 1fr;
+      row-gap: 12px;
+    }
+  }
+</style>

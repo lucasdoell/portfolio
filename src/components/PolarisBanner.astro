@@ -1,0 +1,97 @@
+---
+// Short full-bleed callout. The scene comes from Polaris's own pixel generator (scripts/gen_banner.py).
+---
+
+<section class="banner" aria-label="Polaris">
+  <div class="banner__art banner__art--day only-day" aria-hidden="true"></div>
+  <div class="banner__art banner__art--night only-night" aria-hidden="true"></div>
+  <div class="banner__inner wrap">
+    <div class="banner__copy">
+      <span class="meta banner__meta">Now building</span>
+      <img class="pixelated only-day banner__wordmark" src="/brand/wordmark-light.png" alt="Polaris" width="178" height="56" />
+      <img class="pixelated only-night banner__wordmark" src="/brand/wordmark-dark.png" alt="Polaris" width="178" height="56" />
+      <p class="banner__tagline">The north star for your agents.</p>
+    </div>
+    <div class="banner__links">
+      <span class="meta banner__meta">Free · Open source · macOS</span>
+      <a class="meta meta--accent" href="/work/polaris">See how it was made →</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .banner {
+    position: relative;
+    height: 420px;
+    overflow: hidden;
+    background: #fce9d2;
+  }
+  :global(:root[data-theme="dark"]) .banner {
+    background: #0b0f1e;
+  }
+  .banner__art {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: 67% 100%;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+  }
+  .banner__art--day {
+    background-image: url("/brand/banner-dawn.png");
+  }
+  .banner__art--night {
+    background-image: url("/brand/banner-night.png");
+  }
+  /* `only-night` reverts display; these need to stay blocks. */
+  :global(:root[data-theme="dark"]) .banner__art--night {
+    display: block !important;
+  }
+  .banner__inner {
+    position: relative;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-top: 64px;
+    gap: 32px;
+  }
+  .banner__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .banner__meta {
+    color: var(--banner-meta);
+  }
+  .banner__wordmark {
+    width: 178px;
+    height: 56px;
+  }
+  .banner__tagline {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 26px;
+    line-height: 32px;
+  }
+  .banner__links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+  }
+
+  @media (max-width: 760px) {
+    .banner__inner {
+      flex-direction: column;
+      justify-content: flex-start;
+      padding-top: 40px;
+      gap: 24px;
+    }
+    .banner__links {
+      align-items: flex-start;
+    }
+  }
+</style>

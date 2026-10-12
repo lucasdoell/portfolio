@@ -1,0 +1,280 @@
+---
+import Nav from "./Nav.astro";
+import Star from "./Star.astro";
+---
+
+<div class="sky-region" data-sky-region>
+  {/* Night only: the WebGPU sky, edge to edge behind the nav and hero. */}
+  <div class="sky" aria-hidden="true">
+    <canvas class="sky__canvas" data-night-sky></canvas>
+  </div>
+
+  <Nav />
+
+  <section class="hero wrap" aria-label="Introduction">
+    <div class="hero__inner">
+      <div class="hero__meta hero__meta--left">
+        <span class="meta meta--muted">Index — 2026</span>
+        <span class="meta">Software engineer</span>
+      </div>
+      <div class="hero__meta hero__meta--right">
+        <span class="meta meta--muted">Ewing, NJ · <time data-clock>--:--:--</time></span>
+        <span class="meta">N 40.28° · W 74.78°</span>
+      </div>
+
+      <figure class="hero__portrait">
+        <img src="/portrait.jpg" alt="Lucas Doell" width="208" height="260" fetchpriority="high" />
+        <figcaption>
+          <span class="meta meta--muted">Fig. 01</span>
+          <span class="meta meta--muted">L.D., 2026</span>
+        </figcaption>
+      </figure>
+
+      <h1 class="hero__name">
+        <span class="hero__first">Lucas</span>
+        <span class="hero__last">
+          <span>Doell</span>
+          <span class="hero__star" data-polaris><Star size={48} core /></span>
+        </span>
+      </h1>
+
+      <div class="hero__lede">
+        <p>
+          I build AI agents for New Jersey state government, stats tools for esports teams, and Polaris, an
+          open-source home for the coding agents I work with every day.
+        </p>
+        <span class="meta meta--muted">Team lead, NJ DCA · lux.dev</span>
+      </div>
+
+      <div class="hero__strip">
+        <span class="hero__status meta"><span class="hero__dot" aria-hidden="true"></span>Not taking on new work — 2026</span>
+        <span class="meta meta--muted">Polaris sits 40.3° above Ewing tonight</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .sky-region {
+    position: relative;
+    isolation: isolate;
+  }
+
+  /* Full-bleed: the sky ignores the page column and spans the viewport. */
+  .sky {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    display: none;
+    overflow: hidden;
+  }
+  .sky__canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  :global(:root[data-theme="dark"]) .sky {
+    display: block;
+  }
+  /* No WebGPU: a still of the same sky. */
+  .sky[data-fallback] {
+    background: var(--color-night) url("/brand/night-sky.png") center / cover no-repeat;
+    image-rendering: pixelated;
+  }
+  .sky[data-fallback] .sky__canvas {
+    display: none;
+  }
+
+  .hero__inner {
+    /* Fill the first screen under the nav; the Polaris banner starts below the fold. */
+    --hero-h: max(640px, calc(100svh - 72px));
+    /* The portrait gives up height on short screens so it never runs into the lede. */
+    --portrait-h: clamp(140px, calc(var(--hero-h) - 480px), 260px);
+    position: relative;
+    height: var(--hero-h);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .hero__meta {
+    position: absolute;
+    top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .hero__meta--left {
+    left: 0;
+  }
+  .hero__meta--right {
+    right: 0;
+    align-items: flex-end;
+  }
+  [data-clock] {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hero__portrait {
+    position: absolute;
+    top: clamp(112px, 11.7vw, 168px);
+    /* Shares its left edge with the lede, as in the mock. */
+    left: calc(100% - min(448px, 31vw));
+    width: min(clamp(150px, 14.45vw, 208px), calc(var(--portrait-h) * 0.8));
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .hero__portrait img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: 45% 30%;
+    display: block;
+  }
+  .hero__portrait figcaption {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 4px 12px;
+    white-space: nowrap;
+  }
+
+  .hero__name {
+    position: absolute;
+    left: -0.035em;
+    bottom: 76px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    font-weight: 500;
+    font-size: clamp(120px, 20vw, 288px);
+    line-height: 0.82;
+    letter-spacing: -0.055em;
+  }
+  .hero__last {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.06em;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.042em;
+    line-height: 0.867;
+    letter-spacing: -0.035em;
+  }
+  .hero__star {
+    display: inline-flex;
+    margin-top: 0.15em;
+  }
+  .hero__star :global(svg) {
+    width: 0.16em;
+    height: 0.16em;
+  }
+
+  .hero__lede {
+    position: absolute;
+    right: 0;
+    bottom: 118px;
+    width: min(448px, 31vw);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .hero__lede p {
+    margin: 0;
+    font-size: 20px;
+    line-height: 30px;
+    letter-spacing: -0.005em;
+    text-wrap: pretty;
+  }
+
+  .hero__strip {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+  }
+  .hero__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero__dot {
+    width: 6px;
+    height: 6px;
+    background: var(--muted);
+  }
+
+  /* Phones and small tablets: stack the hero, keep the corner meta. */
+  @media (max-width: 900px) {
+    .hero__inner {
+      height: auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      column-gap: 16px;
+      padding-block: 24px 20px;
+    }
+    .hero__meta,
+    .hero__portrait,
+    .hero__name,
+    .hero__lede,
+    .hero__strip {
+      position: static;
+    }
+    .hero__meta--left {
+      grid-column: 1;
+      grid-row: 1;
+    }
+    .hero__meta--right {
+      grid-column: 2;
+      grid-row: 1;
+    }
+    .hero__portrait {
+      grid-column: 2;
+      grid-row: 2;
+      width: 132px;
+      margin-top: 40px;
+      justify-self: end;
+    }
+    .hero__portrait figcaption span:last-child {
+      display: none;
+    }
+    .hero__name {
+      grid-column: 1 / -1;
+      grid-row: 3;
+      margin-top: 24px;
+      font-size: 30.8vw;
+    }
+    .hero__lede {
+      grid-column: 1 / -1;
+      grid-row: 4;
+      width: auto;
+      margin-top: 32px;
+    }
+    .hero__lede p {
+      font-size: 18px;
+      line-height: 28px;
+    }
+    .hero__strip {
+      grid-column: 1 / -1;
+      grid-row: 5;
+      margin-top: 40px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+  }
+</style>
+
+<script>
+  import { mountHeroSky } from "../lib/hero-sky";
+  import { startClock } from "../lib/clock";
+
+  startClock(document.querySelector<HTMLTimeElement>("[data-clock]"));
+  mountHeroSky();
+</script>

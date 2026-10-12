@@ -1,0 +1,82 @@
+---
+import { links } from "../data/links";
+---
+
+<section id="contact" class="contact wrap" aria-label="Contact">
+  <div class="contact__main">
+    <span class="meta meta--muted">Not taking on work right now, but always up for talking shop</span>
+    <a class="contact__email" href={`mailto:${links.email}`}>{links.email}</a>
+  </div>
+  <dl class="contact__links">
+    <div>
+      <dt class="meta meta--muted">GitHub</dt>
+      <dd><a class="meta" href={links.github}>@lucasdoell ↗</a></dd>
+    </div>
+    <div>
+      <dt class="meta meta--muted">Twitter</dt>
+      <dd><a class="meta" href={links.twitter}>@lucasdoell ↗</a></dd>
+    </div>
+    <div>
+      <dt class="meta meta--muted">LinkedIn</dt>
+      <dd><a class="meta" href={links.linkedin}>in/lucasdoell ↗</a></dd>
+    </div>
+  </dl>
+</section>
+
+<style>
+  .contact {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 64px;
+    padding-top: 200px;
+    padding-bottom: 96px;
+  }
+  .contact__main {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    min-width: 0;
+  }
+  .contact__email {
+    font-weight: 500;
+    font-size: clamp(46px, 6.7vw, 96px);
+    line-height: 0.96;
+    letter-spacing: -0.045em;
+    overflow-wrap: anywhere;
+  }
+  .contact__email:hover {
+    color: var(--accent);
+  }
+  .contact__links {
+    margin: 0;
+    width: 300px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 10px;
+  }
+  .contact__links div {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  /* The link inherits the 28px body line box otherwise and drops below its label. */
+  .contact__links dd {
+    margin: 0;
+    line-height: 16px;
+  }
+  @media (max-width: 900px) {
+    .contact {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 40px;
+      padding-top: 120px;
+      padding-bottom: 64px;
+    }
+    .contact__links {
+      width: 100%;
+    }
+  }
+</style>

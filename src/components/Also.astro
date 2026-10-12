@@ -1,0 +1,101 @@
+---
+import { also } from "../data/work";
+---
+
+<div class="also">
+  <h3 class="meta also__title">Also</h3>
+  <ul class="also__rows">
+    {
+      also.map((row) => (
+        <li class="also__row">
+          {row.href ? (
+            <a class="also__name" href={row.href}>
+              {row.name}
+            </a>
+          ) : (
+            <span class="also__name">{row.name}</span>
+          )}
+          <span class="also__note">{row.note}</span>
+          <span class="meta meta--muted also__tag">{row.tag}</span>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<style>
+  .also {
+    display: grid;
+    grid-template-columns: var(--label-col) minmax(0, 1fr);
+    column-gap: var(--col-gap);
+    padding-top: 40px;
+    border-top: 1px solid var(--line);
+  }
+  .also__title {
+    margin: 0;
+    font-weight: 400;
+  }
+  .also__rows {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .also__row {
+    display: flex;
+    align-items: baseline;
+    gap: 24px;
+    padding-block: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .also__row:first-child {
+    padding-top: 0;
+  }
+  .also__row:last-child {
+    border-bottom: 0;
+  }
+  .also__name {
+    flex-shrink: 0;
+    width: 220px;
+    font-size: 17px;
+    line-height: 22px;
+    font-weight: 500;
+  }
+  a.also__name:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+  }
+  .also__note {
+    flex: 1;
+    font-size: 15px;
+    line-height: 22px;
+    color: var(--muted);
+  }
+  .also__tag {
+    flex-shrink: 0;
+    width: 150px;
+    text-align: right;
+  }
+
+  @media (max-width: 900px) {
+    .also {
+      grid-template-columns: 1fr;
+      row-gap: 20px;
+    }
+    .also__row {
+      flex-wrap: wrap;
+      row-gap: 4px;
+    }
+    .also__name {
+      width: auto;
+      flex: 1;
+    }
+    .also__tag {
+      width: auto;
+    }
+    .also__note {
+      order: 3;
+      flex-basis: 100%;
+    }
+  }
+</style>

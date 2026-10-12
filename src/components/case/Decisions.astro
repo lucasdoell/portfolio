@@ -1,0 +1,91 @@
+---
+interface Props {
+  title: string;
+  note: string;
+  items: { tag: string; decision: string; body: string }[];
+}
+const { title, note, items } = Astro.props;
+---
+
+<section class="decisions wrap">
+  <header class="decisions__head">
+    <h2 class="section-title">{title}</h2>
+    <span class="meta meta--muted">{note}</span>
+  </header>
+  {
+    items.map((d, i) => (
+      <div class="decision-row">
+        <div class="decision-row__label">
+          <span class="meta">
+            {String(i + 1).padStart(2, "0")} · {d.tag}
+          </span>
+          <span class="meta meta--muted">Decision record</span>
+        </div>
+        <div class="decision-row__body">
+          <h3 class="decision-row__title">{d.decision}</h3>
+          <p class="body-copy">{d.body}</p>
+        </div>
+      </div>
+    ))
+  }
+</section>
+
+<style>
+  .decisions {
+    padding-top: 144px;
+  }
+  .decisions__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--line-strong);
+  }
+  .section-title {
+    margin: 0;
+  }
+  .decision-row {
+    display: grid;
+    grid-template-columns: var(--label-col) minmax(0, 1fr);
+    column-gap: var(--col-gap);
+    padding: 40px 0 56px;
+    border-bottom: 1px solid var(--line);
+  }
+  .decision-row__label {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-self: start;
+  }
+  .decision-row__body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .decision-row__title {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(28px, 2.5vw, 36px);
+    line-height: 1.22;
+    text-wrap: pretty;
+  }
+  .body-copy {
+    margin: 0;
+  }
+  @media (max-width: 900px) {
+    .decisions {
+      padding-top: 96px;
+    }
+    .decisions__head {
+      flex-direction: column;
+      gap: 12px;
+    }
+    .decision-row {
+      grid-template-columns: 1fr;
+      row-gap: 20px;
+    }
+  }
+</style>

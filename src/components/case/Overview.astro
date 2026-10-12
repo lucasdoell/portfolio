@@ -1,0 +1,58 @@
+---
+interface Props {
+  label?: string;
+  lead: string;
+}
+const { label = "Overview", lead } = Astro.props;
+---
+
+<section class="overview wrap">
+  <h2 class="meta overview__label">{label}</h2>
+  <div class="overview__body">
+    <p class="overview__lead">{lead}</p>
+    <slot />
+  </div>
+</section>
+
+<style>
+  .overview {
+    display: grid;
+    grid-template-columns: var(--label-col) minmax(0, 1fr);
+    column-gap: var(--col-gap);
+    padding-block: 120px;
+  }
+  .overview__label {
+    margin: 0;
+    font-weight: 400;
+  }
+  .overview__body {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .overview__lead {
+    margin: 0;
+    max-width: 780px;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(30px, 2.8vw, 40px);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    text-wrap: pretty;
+  }
+  .overview__body :global(p:not(.overview__lead)) {
+    margin: 0;
+    max-width: 640px;
+    font-size: 18px;
+    line-height: 30px;
+    text-wrap: pretty;
+  }
+  @media (max-width: 900px) {
+    .overview {
+      grid-template-columns: 1fr;
+      row-gap: 24px;
+      padding-block: 72px;
+    }
+  }
+</style>

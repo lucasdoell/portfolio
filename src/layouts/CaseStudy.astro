@@ -1,0 +1,63 @@
+---
+import Nav from "../components/Nav.astro";
+import Layout from "./Layout.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  next: { index: string; title: string; href: string };
+}
+const { title, description, image, next } = Astro.props;
+---
+
+<Layout title={`${title} — Lucas Doell`} description={description} image={image}>
+  <Nav slot="top" />
+  <article class="case">
+    <slot />
+  </article>
+  <nav class="case-next wrap" aria-label="Next case study">
+    <a class="case-next__link" href={next.href}>
+      <span class="meta meta--muted">Next case study — {next.index}</span>
+      <span class="case-next__title">{next.title} →</span>
+    </a>
+    <a class="meta meta--accent case-next__back" href="/#work">Back to the logbook</a>
+  </nav>
+</Layout>
+
+<style>
+  .case-next {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 40px;
+    padding-top: 200px;
+    padding-bottom: 96px;
+  }
+  .case-next__link {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .case-next__title {
+    font-weight: 500;
+    font-size: clamp(44px, 6.7vw, 96px);
+    line-height: 0.96;
+    letter-spacing: -0.045em;
+  }
+  .case-next__link:hover .case-next__title {
+    color: var(--accent);
+  }
+  .case-next__back {
+    padding-bottom: 12px;
+    flex-shrink: 0;
+  }
+  @media (max-width: 760px) {
+    .case-next {
+      flex-direction: column;
+      align-items: flex-start;
+      padding-top: 120px;
+      padding-bottom: 64px;
+    }
+  }
+</style>

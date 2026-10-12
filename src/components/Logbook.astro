@@ -1,0 +1,216 @@
+---
+import { entries } from "../data/work";
+import { links } from "../data/links";
+import Also from "./Also.astro";
+---
+
+<section id="work" class="logbook wrap" aria-labelledby="logbook-title">
+  <header class="logbook__head">
+    <h2 id="logbook-title" class="section-title">Logbook</h2>
+    <span class="meta meta--muted">Selected work, 2023 — 2026</span>
+  </header>
+
+  <article class="entry entry--lead">
+    <div class="entry__label">
+      <div class="entry__line">
+        <span class="meta">01 · Polaris</span>
+        <span class="meta meta--muted">Sep 2026 — Now</span>
+      </div>
+      <h3 class="decision">One window for every coding agent you run.</h3>
+      <p class="body-copy">
+        Polaris runs Claude Code and Codex side by side, on your Mac or any machine you can SSH into. It stays quiet
+        while your agents work and tells you which one is stuck. It uses the agents and logins you already have. Free
+        and open source.
+      </p>
+      <dl class="facts">
+        <div><dt class="meta meta--muted">Role</dt><dd class="meta">Design, code, brand</dd></div>
+        <div><dt class="meta meta--muted">Built with</dt><dd class="meta">9–12 agents at a time</dd></div>
+        <div><dt class="meta meta--muted">License</dt><dd class="meta">Apache-2.0</dd></div>
+      </dl>
+      <div class="entry__links">
+        <a class="meta meta--accent" href="/work/polaris">Read the case study →</a>
+        <a class="meta" href={links.polarisRepo}>GitHub ↗</a>
+      </div>
+    </div>
+    <figure class="entry__shot">
+      <img
+        class="only-day"
+        src="/work/polaris/needs-you.webp"
+        alt="Polaris in light mode: an inbox of agents that need an answer, with one question open."
+        width="2880"
+        height="1800"
+        loading="lazy"
+        data-zoom
+      />
+      <img
+        class="only-night"
+        src="/work/polaris/new-session.webp"
+        alt="Polaris in dark mode: a new session over a pixel night sky."
+        width="2880"
+        height="1800"
+        loading="lazy"
+        data-zoom
+      />
+      <figcaption class="meta meta--muted">
+        <span class="only-day">Fig. 02 — Needs you. Only the stuck agent asks for you.</span>
+        <span class="only-night">Fig. 02 — A new session. Empty states get the night sky.</span>
+      </figcaption>
+    </figure>
+  </article>
+
+  {
+    entries.map((e, i) => (
+      <article class="entry">
+        <div class="entry__label">
+          <div class="entry__line">
+            <span class="meta">
+              {String(i + 2).padStart(2, "0")} · {e.title}
+            </span>
+            <span class="meta meta--muted">{e.span}</span>
+          </div>
+          <p class="entry__role">{e.role}</p>
+        </div>
+        <div class="entry__body">
+          <h3 class="decision">{e.decision}</h3>
+          <p class="body-copy">{e.body}</p>
+          <div class="entry__links">
+            {e.facts.map((f) => (
+              <span class="meta meta--muted">{f}</span>
+            ))}
+            {e.links.map((l) => (
+              <a class:list={["meta", { "meta--accent": l.accent }]} href={l.href}>
+                {l.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </article>
+    ))
+  }
+
+  <Also />
+</section>
+
+<style>
+  .logbook__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+    padding: 120px 0 40px;
+    border-bottom: 1px solid var(--line-strong);
+  }
+  .section-title {
+    margin: 0;
+  }
+
+  .entry {
+    display: grid;
+    grid-template-columns: var(--label-col) minmax(0, 1fr);
+    column-gap: var(--col-gap);
+    padding: 40px 0 88px;
+    border-top: 1px solid var(--line);
+  }
+  .entry--lead {
+    border-top: 0;
+    padding-bottom: 96px;
+  }
+  .entry__label {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .entry--lead .entry__label {
+    gap: 32px;
+  }
+  .entry__line {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .entry__role {
+    margin: 0;
+    font-size: 15px;
+    line-height: 22px;
+    color: var(--muted);
+  }
+  .entry__body {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .decision {
+    margin: 0;
+  }
+  .entry__body .decision {
+    max-width: 760px;
+  }
+  .body-copy {
+    margin: 0;
+  }
+  .entry__links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    column-gap: 40px;
+    row-gap: 12px;
+  }
+  .entry--lead .entry__links {
+    column-gap: 28px;
+  }
+
+  .facts {
+    margin: 0;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .facts div {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .facts dd {
+    margin: 0;
+  }
+
+  .entry__shot {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .entry__shot img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1440 / 900;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    display: block;
+  }
+  :global(:root[data-theme="dark"]) .entry__shot img.only-night {
+    display: block !important;
+  }
+
+  @media (max-width: 900px) {
+    .logbook__head {
+      padding-top: 80px;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .entry,
+    .entry--lead {
+      grid-template-columns: 1fr;
+      row-gap: 20px;
+      padding: 32px 0 64px;
+    }
+    .entry--lead .entry__label {
+      gap: 24px;
+    }
+    .entry__shot {
+      order: 0;
+    }
+  }
+</style>
